@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="120dp"
+              android:gravity="center"
+              android:layout_height="wrap_content"
+              android:layout_margin="10dp"
+              android:padding="10dp"
+              android:background="@drawable/bg_homepage_save_item"
+              android:orientation="vertical">
+
+
+    <TextView
+        android:drawablePadding="5dp"
+        android:id="@+id/tv_save"
+        style="@style/NormalBlueTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_save_value"
+        style="@style/NormalGrayTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_text"/>
+
+</LinearLayout>
+

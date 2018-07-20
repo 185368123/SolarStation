@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <TextView
+        style="@style/SmallGrayTextSizeStyle"
+        android:id="@+id/tv_map_search"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:hint="@string/please_enter_keyword_search"
+        android:drawableStart="@mipmap/ic_search"
+        android:drawableLeft="@mipmap/ic_search"
+        android:drawablePadding="5dp"
+        android:singleLine="true"
+        android:background="@drawable/bg_rounded_rectangle_bgcolor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RadioGroup
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/rg_map_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:button="@null"
+                android:background="@drawable/bg_satellite_map"
+                android:id="@+id/rb_map_satellite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:checked="true"
+                android:button="@null"
+                android:background="@drawable/bg_2d_map"
+                android:id="@+id/rb_map_2d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RadioGroup>
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/rg_map_change"
+            android:src="@mipmap/ic_map_location"
+            android:id="@+id/iv_map_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="15dp"
+        android:id="@+id/rv_map_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:orientation="horizontal"
+        app:layoutManager="LinearLayoutManager"
+        />
+
+</LinearLayout>
+
+
+

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_bottom_title">
+        <item>@string/homepage</item>
+        <item>@string/project</item>
+        <item>@string/alarm</item>
+    </string-array>
+
+    <integer-array name="main_bottom_icon">
+        <item>@drawable/main_bottom_homepage</item>
+        <item>@drawable/main_bottom_project</item>
+        <item>@drawable/main_bottom_alarm</item>
+    </integer-array>
+
+    <string-array name="homepage_number_title">
+        <item>@string/project_number</item>
+        <item>@string/power_station_number</item>
+    </string-array>
+
+    <integer-array name="homepage_number_icon">
+        <item>@mipmap/ic_electricity</item>
+        <item>@mipmap/ic_standard_coal</item>
+    </integer-array>
+
+    <string-array name="homepage_electricity_title">
+        <item>@string/month_generating_capacity</item>
+        <item>@string/year_generating_capacity</item>
+        <item>@string/cumulative_generating_capacity</item>
+        <item>@string/month_electricity_consumption</item>
+        <item>@string/year_electricity_consumption</item>
+        <item>@string/cumulative_electricity_consumption</item>
+    </string-array>
+
+    <string-array name="homepage_chart_title">
+    <item>@string/day_generating_capacity</item>
+    <item>@string/day_electricity_consumption</item>
+    </string-array>
+
+    <string-array name="homepage_save_title">
+        <item>@string/save_electricity</item>
+        <item>@string/save_standard_coal</item>
+        <item>@string/so2_emission_reduction</item>
+        <item>@string/co2_emission_reduction</item>
+    </string-array>
+
+    <integer-array name="homepage_save_icon">
+        <item>@mipmap/ic_electricity</item>
+        <item>@mipmap/ic_standard_coal</item>
+        <item>@mipmap/ic_so2</item>
+        <item>@mipmap/ic_co2</item>
+    </integer-array>
+
+    <string-array name="project_electricity_title">
+        <item>@string/month_generating_capacity</item>
+        <item>@string/year_generating_capacity</item>
+        <item>@string/cumulative_generating_capacity</item>
+        <item>@string/month_electricity_consumption</item>
+        <item>@string/year_electricity_consumption</item>
+        <item>@string/cumulative_electricity_consumption</item>
+    </string-array>
+
+    <string-array name="project_chart_title">
+        <item>@string/day_generating_capacity</item>
+        <item>@string/day_electricity_consumption</item>
+    </string-array>
+
+    <string-array name="project_save_title">
+        <item>@string/save_electricity</item>
+        <item>@string/save_standard_coal</item>
+        <item>@string/so2_emission_reduction</item>
+        <item>@string/co2_emission_reduction</item>
+    </string-array>
+
+    <integer-array name="project_save_icon">
+        <item>@mipmap/ic_electricity</item>
+        <item>@mipmap/ic_standard_coal</item>
+        <item>@mipmap/ic_so2</item>
+        <item>@mipmap/ic_co2</item>
+    </integer-array>
+
+    <string-array name="power_station_electricity_title">
+        <item>@string/month_generating_capacity</item>
+        <item>@string/year_generating_capacity</item>
+        <item>@string/cumulative_generating_capacity</item>
+        <item>@string/month_electricity_consumption</item>
+        <item>@string/year_electricity_consumption</item>
+        <item>@string/cumulative_electricity_consumption</item>
+    </string-array>
+
+    <string-array name="power_station_chart_title">
+        <item>@string/day_generating_capacity</item>
+        <item>@string/day_electricity_consumption</item>
+    </string-array>
+
+    <string-array name="power_station_save_title">
+        <item>@string/save_electricity</item>
+        <item>@string/save_standard_coal</item>
+        <item>@string/so2_emission_reduction</item>
+        <item>@string/co2_emission_reduction</item>
+    </string-array>
+
+    <integer-array name="power_station_save_icon">
+        <item>@mipmap/ic_electricity</item>
+        <item>@mipmap/ic_standard_coal</item>
+        <item>@mipmap/ic_so2</item>
+        <item>@mipmap/ic_co2</item>
+    </integer-array>
+
+
+    <string-array name="menu_content_title">
+        <item>@string/company</item>
+        <item>@string/address</item>
+        <item>@string/project</item>
+        <item>@string/power_station</item>
+        <item>@string/device</item>
+    </string-array>
+
+    <string-array name="power_station_details_title">
+        <item>@string/basic_survey</item>
+        <item>@string/power_station_information</item>
+    </string-array>
+
+    <string-array name="basic_survey_chart_title">
+        <item>@string/charging_power</item>
+        <item>@string/discharge_power</item>
+    </string-array>
+
+    <string-array name="power_station_information_title">
+        <item>@string/basic_information</item>
+        <item>@string/battery_board_information</item>
+        <item>@string/storage_battery_information</item>
+        <item>@string/load_information</item>
+        <item>@string/geography_information</item>
+    </string-array>
+
+    <string-array name="basic_information_title">
+        <item>@string/power_station_name</item>
+        <item>@string/belong_to_project</item>
+        <item>@string/install_date</item>
+        <item>@string/design_vendor</item>
+    </string-array>
+
+    <string-array name="battery_board_information_title">
+        <item>@string/total_power_of_battery_board</item>
+        <item>@string/type_of_battery_board</item>
+        <item>@string/the_quantity_of_battery_board_connected_in_series</item>
+        <item>@string/the_quantity_of_battery_board_connected_in_parallel</item>
+        <item>@string/power_of_single_battery_board</item>
+        <item>@string/total_quantity_of_battery_board</item>
+        <item>@string/total_open_circuit_voltage_of_battery_board</item>
+        <item>@string/total_working_current_of_battery_board</item>
+        <item>@string/single_battery_board_vmp</item>
+        <item>@string/single_battery_board_voc</item>
+        <item>@string/single_battery_board_imp</item>
+        <item>@string/single_battery_board_isc</item>
+        <item>@string/battery_board_remark</item>
+    </string-array>
+
+    <string-array name="storage_battery_information_title">
+        <item>@string/type_of_storage_battery</item>
+        <item>@string/single_battery_voltage</item>
+        <item>@string/single_battery_capacity</item>
+        <item>@string/the_quantity_of_battery_connected_in_series</item>
+        <item>@string/the_quantity_of_battery_connected_in_parallel</item>
+        <item>@string/total_quantity_of_battery</item>
+        <item>@string/total_battery_voltage</item>
+        <item>@string/total_battery_capacity</item>
+        <item>@string/storage_battery_remark</item>
+    </string-array>
+
+    <string-array name="load_information_title">
+        <item>@string/load_type</item>
+        <item>@string/load_power</item>
+    </string-array>
+
+    <string-array name="geography_information_title">
+        <item>@string/address</item>
+        <item>@string/coordinate</item>
+        <item>@string/maximum_annual_temperature</item>
+        <item>@string/minimum_annual_temperature</item>
+        <item>@string/geography_remark</item>
+    </string-array>
+
+
+    <string-array name="battery_board_type_title">
+        <item>@string/single_crystalline_silicon</item>
+        <item>@string/multi_crystalline_silicon</item>
+        <item>@string/non_crystalline_silicon</item>
+        <item>@string/other_crystalline_silicon</item>
+    </string-array>
+
+    <string-array name="storage_battery_type_title">
+        <item>@string/custom</item>
+        <item>@string/open_mouth</item>
+        <item>@string/seal</item>
+        <item>@string/colloid</item>
+        <item>@string/lithium_battery</item>
+    </string-array>
+
+    <string-array name="load_type_title">
+        <item>@string/dc</item>
+        <item>@string/ac</item>
+        <item>@string/dc_and_ac</item>
+    </string-array>
+
+    <string-array name="device_manage_title">
+        <item>@string/real_time_monitoring</item>
+        <item>@string/real_time_curve</item>
+        <item>@string/data_detail</item>
+        <item>@string/parameter_setting</item>
+        <item>@string/device_information</item>
+    </string-array>
+
+    <string-array name="parameter_setting_title">
+        <item>@string/storage_battery_parameter</item>
+        <item>@string/load_parameter</item>
+        <item>@string/inverter_parameter</item>
+    </string-array>
+
+    <string-array name="storage_battery_parameter_title">
+        <item>@string/nominal_capacity</item>
+        <item>@string/overpressure_voltage</item>
+        <item>@string/charge_limit_voltage</item>
+        <item>@string/balance_charge_voltage</item>
+        <item>@string/lifting_charge_voltage</item>
+        <item>@string/floating_charge_voltage</item>
+        <item>@string/lifting_charge_return_voltage</item>
+        <item>@string/over_discharge_return_voltage</item>
+        <item>@string/undervoltage_warning_voltage</item>
+        <item>@string/over_discharge_voltage</item>
+        <item>@string/discharge_limit_voltage</item>
+        <item>@string/over_discharge_delay_time</item>
+        <item>@string/balance_charge_time</item>
+        <item>@string/lifting_charge_time</item>
+        <item>@string/balance_charge_interval</item>
+        <item>@string/temperature_compensation_coefficient</item>
+    </string-array>
+
+    <string-array name="load_parameter_title">
+        <item>@string/load_work_mode</item>
+        <item>@string/light_control_delay_time</item>
+        <item>@string/light_control_voltage</item>
+    </string-array>
+
+    <string-array name="edit_device_title">
+        <item>@string/product_model</item>
+        <item>@string/product_type</item>
+        <item>@string/software_version</item>
+        <item>@string/hardware_version</item>
+        <item>@string/device_address</item>
+        <item>@string/device_serial_number</item>
+    </string-array>
+
+
+    <string-array name="new_build_project_title">
+        <item>@string/project_name</item>
+        <item>@string/company_name</item>
+        <item>@string/personal_name</item>
+        <item>@string/detailed_address</item>
+    </string-array>
+
+
+    <string-array name="real_time_monitoring_title">
+        <item>@string/storage_battery_state</item>
+        <item>@string/battery_board_state</item>
+        <item>@string/DC_load_state</item>
+        <item>@string/AC_load_state</item>
+    </string-array>
+
+    <string-array name="storage_battery_title">
+        <item>@string/electricity_soc</item>
+        <item>@string/voltage</item>
+        <item>@string/current</item>
+        <item>@string/temperature</item>
+        <item>@string/charging_state</item>
+        <item>@string/minimum_voltage_on_the_same_day</item>
+        <item>@string/maximum_voltage_on_the_same_day</item>
+    </string-array>
+
+    <string-array name="battery_board_title">
+        <item>@string/solar_panel_voltage</item>
+        <item>@string/solar_panel_current</item>
+        <item>@string/charging_power</item>
+    </string-array>
+
+    <string-array name="load_title">
+        <item>@string/DC_load_voltage</item>
+        <item>@string/DC_load_electricity</item>
+        <item>@string/DC_load_power</item>
+    </string-array>
+
+    <string-array name="load2_title">
+        <item>@string/AC_load_voltage</item>
+        <item>@string/AC_load_electricity</item>
+        <item>@string/AC_load_power</item>
+        <item>@string/AC_load_frequency</item>
+    </string-array>
+
+    <string-array name="data_detail_title">
+        <item>@string/all</item>
+        <item>@string/storage_battery</item>
+        <item>@string/battery_board</item>
+        <item>@string/load</item>
+    </string-array>
+
+
+    <string-array name="alarm_type_title">
+        <item>@string/type</item>
+
+    </string-array>
+
+    <string-array name="alarm_marked_title">
+        <item>@string/alarm_marked</item>
+        <item>@string/already_marked</item>
+        <item>@string/already_unmarked</item>
+    </string-array>
+
+    <string-array name="alarm_device_title">
+        <item>@string/all_device</item>
+    </string-array>
+</resources>

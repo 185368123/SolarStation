@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_search_content"
+                android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="137dp"
+        android:layout_height="74dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/tv_status"
+        style="@style/SmallWhiteTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_rounded_rectangle_green"
+        android:singleLine="true"
+        android:text="@string/default_text"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/NormalBlackTextSizeStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/iv_icon"
+        android:layout_toLeftOf="@id/tv_status"
+        android:layout_toRightOf="@id/iv_icon"
+        android:layout_toStartOf="@id/tv_status"
+        android:singleLine="true"
+        android:text="@string/default_text"/>
+
+    <TextView
+        android:id="@+id/tv_charging"
+        style="@style/SmallGrayTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/iv_icon"
+        android:layout_toRightOf="@id/iv_icon"
+        android:text="@string/current_charging_power"/>
+
+    <TextView
+        android:id="@+id/tv_charging_value"
+        style="@style/SmallGrayTextSizeStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_status"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/tv_charging"
+        android:layout_toRightOf="@id/tv_charging"
+        android:gravity="end"
+        android:singleLine="true"
+        android:text="@string/default_text"/>
+
+    <TextView
+        android:id="@+id/tv_discharge"
+        style="@style/SmallGrayTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_charging"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@id/iv_icon"
+        android:layout_toRightOf="@id/iv_icon"
+        android:text="@string/current_discharge_power"/>
+
+    <TextView
+        android:id="@+id/tv_discharge_value"
+        style="@style/SmallGrayTextSizeStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_charging_value"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@id/tv_discharge"
+        android:layout_toRightOf="@id/tv_discharge"
+        android:gravity="end"
+        android:singleLine="true"
+        android:text="@string/default_text"/>
+
+</RelativeLayout>
+

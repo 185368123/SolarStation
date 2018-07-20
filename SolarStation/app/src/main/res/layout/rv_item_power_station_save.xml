@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="20dp"
+              android:orientation="horizontal">
+
+
+    <TextView
+        android:drawablePadding="10dp"
+        android:id="@+id/tv_save"
+        style="@style/NormalBlueTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_save_value"
+        style="@style/NormalGrayTextSizeStyle"
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_text"/>
+
+</LinearLayout>
+

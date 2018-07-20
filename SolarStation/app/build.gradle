@@ -1,0 +1,147 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.shuorigf.solarstaition"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+//        resConfigs ["en", "zh"]
+
+        ndk {
+            ["armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"]
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    flavorDimensions "default"
+    productFlavors {
+        clx {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "clx"]
+            dimension 'default'
+        }
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    signingConfigs {
+
+        defaultConifg {
+            android.applicationVariants.all { variant ->
+                if (variant.buildType.name == "debug") {
+                    // 服务器地址
+                    buildConfigField "String", "HOST", "\"http://station-iot.com/\""
+                } else if (variant.buildType.name == "release") {
+                    // 服务器地址
+                    buildConfigField "String", "HOST", "\"http://station-iot.com/\""
+                }
+                variant.outputs.all {
+                    outputFileName = "solarstaiton_v-${variant.versionName}.apk"
+                }
+            }
+        }
+
+        debug {
+            storeFile file("solarstation.jks")
+            storePassword "s123456"
+            keyAlias "solarstation"
+            keyPassword "s123456"
+        }
+
+        release {
+            storeFile file("solarstation.jks")
+            storePassword "s123456"
+            keyAlias "solarstation"
+            keyPassword "s123456"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            // 混淆
+            minifyEnabled false
+            debuggable true
+
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            // 混淆
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+            java.srcDirs = ['src/main/java']
+        }
+        androidTest {
+            setRoot 'src/tests'
+        }
+    }
+    packagingOptions {
+        exclude "META-INF/rxjava.properties"
+    }
+
+
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.0.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:26.0.2'
+    compile 'com.android.support:recyclerview-v7:26.0.2'
+    compile 'com.android.support:cardview-v7:26.0.2'
+    compile 'com.android.support:support-annotations:26.0.2'
+    compile 'com.android.support:multidex:1.0.3'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.9.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    compile('com.squareup.retrofit2:retrofit:2.3.0') {
+        // exclude dependencies module okHttp
+        exclude module: "okhttp"
+    }
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.2'
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    //    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    compile 'pub.devrel:easypermissions:1.1.3'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
+
+    compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+}

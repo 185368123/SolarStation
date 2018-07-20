@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:drawableRight="@mipmap/ic_pull_gray"
+            android:padding="15dp"
+            style="@style/NormalGrayTextSizeStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/all"
+            android:id="@+id/tv_data_detail_1"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            style="@style/vertical_parting_line"/>
+
+        <TextView
+            android:drawableRight="@mipmap/ic_pull_gray"
+            android:padding="15dp"
+            style="@style/NormalGrayTextSizeStyle"
+            android:layout_width="0dip"
+            android:id="@+id/tv_data_detail_2"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/default_text"/>
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/horizontal_parting_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/lightBlue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/NormalBlackTextSizeStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/time"/>
+
+        <TextView
+            style="@style/NormalBlackTextSizeStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/current_A"/>
+
+        <TextView
+            style="@style/NormalBlackTextSizeStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/voltage_V"/>
+
+
+        <TextView
+            style="@style/NormalBlackTextSizeStyle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/power_W"/>
+
+    </LinearLayout>
+
+    <View
+        style="@style/horizontal_parting_line"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data_detail_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        app:layoutManager="LinearLayoutManager"/>
+
+</LinearLayout>

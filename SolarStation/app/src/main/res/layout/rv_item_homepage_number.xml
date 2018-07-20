@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="140dp"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <TextView
+        android:drawablePadding="3dp"
+        android:id="@+id/tv_number"
+        style="@style/MiddleWhiteTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_number_value"
+        style="@style/LargeWhiteTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_text"/>
+
+</LinearLayout>
+

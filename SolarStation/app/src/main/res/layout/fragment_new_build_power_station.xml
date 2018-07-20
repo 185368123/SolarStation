@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/iv_new_build_power_station_select_photo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:src="@mipmap/ic_select_photo"/>
+
+        <TextView
+            style="@style/NormalGrayTextSizeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="21dp"
+            android:text="@string/click_add_power_station_photos"
+            />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_new_build_power_station_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:overScrollMode="never"
+            app:layoutManager="LinearLayoutManager"/>
+
+
+        <Button
+            android:id="@+id/btn_new_build_power_station_save"
+            style="@style/NormalWhiteTextSizeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="22dp"
+            android:background="@drawable/bg_rounded_rectangle_blue"
+            android:text="@string/save"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

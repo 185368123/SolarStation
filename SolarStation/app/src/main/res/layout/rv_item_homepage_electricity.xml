@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:padding="10dp"
+              android:orientation="vertical">
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_electricity_value"
+        style="@style/LargeBlackTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_text"/>
+
+    <TextView
+        android:text="@string/unit_electricity"
+        style="@style/SmallGrayTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_electricity"
+        style="@style/SmallGrayTextSizeStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+

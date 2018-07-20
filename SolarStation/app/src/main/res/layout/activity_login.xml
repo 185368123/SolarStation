@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="2"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_login"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/hugeBlueTextSizeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="5dp"
+            android:drawableEnd="@mipmap/ic_logo"
+            android:drawablePadding="10dp"
+            android:drawableRight="@mipmap/ic_logo"
+            android:text="@string/welcome_back"/>
+
+        <TextView
+            style="@style/NormalGrayTextSizeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/sign_in_to_continue"/>
+
+
+        <EditText
+            android:text="admin"
+            android:id="@+id/edt_login_account"
+            style="@style/MiddleBlackTextSizeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_login_edittext"
+            android:drawableLeft="@mipmap/ic_account"
+            android:drawablePadding="12dp"
+            android:drawableStart="@mipmap/ic_account"
+            android:hint="@string/input_account"
+            android:singleLine="true"
+            android:padding="12dp"
+            android:textColorHint="@color/hintSearch"/>
+
+        <EditText
+            android:text="123456"
+            android:id="@+id/edt_login_password"
+            style="@style/MiddleBlackTextSizeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_login_edittext"
+            android:drawableLeft="@mipmap/ic_password"
+            android:drawablePadding="12dp"
+            android:drawableStart="@mipmap/ic_password"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:padding="12dp"
+            android:textColorHint="@color/hintSearch"/>
+
+
+        <Button
+            android:id="@+id/btn_login_login"
+            style="@style/NormalWhiteTextSizeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_rounded_rectangle_blue"
+            android:text="@string/login"/>
+    </LinearLayout>
+</LinearLayout>

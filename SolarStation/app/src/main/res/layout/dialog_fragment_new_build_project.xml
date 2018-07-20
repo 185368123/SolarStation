@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="4dp"
+                                    app:cardPreventCornerOverlap="true"
+                                    app:cardUseCompatPadding="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_new_build_project_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@mipmap/ic_close"/>
+
+        <TextView
+            android:id="@+id/tv_new_build_project_title"
+            style="@style/LargeBlackTextSizeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="15dp"
+            android:text="@string/new_build_project"/>
+
+        <TextView
+            android:id="@+id/tv_new_build_project_information"
+            style="@style/NormalBlueTextSizeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_new_build_project_title"
+            android:layout_centerHorizontal="true"
+            android:background="@color/lightBlue"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/new_build_project"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_new_build_project_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_new_build_project_information"
+            android:overScrollMode="never"
+            app:layoutManager="LinearLayoutManager"/>
+
+        <Button
+            android:layout_below="@id/rv_new_build_project_content"
+            android:background="@drawable/bg_rounded_rectangle_blue"
+            style="@style/MiddleWhiteTextSizeStyle"
+            android:text="@string/new_build_project"
+            android:id="@+id/btn_new_build_project"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

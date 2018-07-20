@@ -1,0 +1,334 @@
+<resources>
+    <string name="app_name">SolarStation</string>
+
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="input_account">输入账号</string>
+    <string name="password">密码</string>
+    <string name="hint_input_account">请输入账号</string>
+    <string name="hint_input_password">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="login_success">登录成功</string>
+    <string name="perm_read_phone_state">请允许程序获取手机识别码的权限</string>
+
+    <string name="homepage">首页</string>
+    <string name="project">项目</string>
+    <string name="alarm">警报</string>
+
+    <string name="default_text">--</string>
+    <string name="format_ton">%1$st</string>
+    <string name="format_electricity">%1$sMwh</string>
+    <string name="format_voltage">%1$sV</string>
+    <string name="format_current">%1$sA</string>
+    <string name="format_power">%1$sW</string>
+    <string name="format_k_power">%1$sKW</string>
+    <string name="format_electricity_soc">%1$s%%</string>
+    <string name="format_temperature">%1$s℃</string>
+    <string name="format_frequency">%1$sHz</string>
+
+    <string name="homepage_title">Solar station</string>
+    <string name="project_number">项目数量</string>
+    <string name="power_station_number">电站数量</string>
+
+    <string name="month_generating_capacity">当月发电量</string>
+    <string name="year_generating_capacity">当年发电量</string>
+    <string name="cumulative_generating_capacity">累计发电量</string>
+    <string name="month_electricity_consumption">当月用电量</string>
+    <string name="year_electricity_consumption">当年用电量</string>
+    <string name="cumulative_electricity_consumption">累计用电量</string>
+    <string name="unit_electricity">Mwh</string>
+
+    <string name="day_generating_capacity">当天发电量</string>
+    <string name="day_electricity_consumption">当天用电量</string>
+
+    <string name="save_electricity">节约电量</string>
+    <string name="save_standard_coal">节约标准煤</string>
+    <string name="so2_emission_reduction">SO2减排</string>
+    <string name="co2_emission_reduction">CO2减排</string>
+    <string name="normal">正常</string>
+    <string name="abnormal">异常</string>
+
+    <string name="super_admin">超级管理员</string>
+    <string name="main_account">主账号</string>
+    <string name="sub_account">子账户</string>
+    <string name="company">公司</string>
+    <string name="address">地址</string>
+    <string name="power_station">电站</string>
+    <string name="device">设备</string>
+    <string name="log_out">退出登录</string>
+
+    <string name="type">类型</string>
+    <string name="alarm_marked">标注</string>
+    <string name="already_marked">已标注</string>
+    <string name="already_unmarked">未标注</string>
+    <string name="all_device">全部设备</string>
+
+    <string name="power_station_list">电站列表</string>
+    <string name="new_build_power_station">新建电站</string>
+    <string name="symbol_new_build_power_station">+ 新建电站</string>
+
+
+    <string name="search">搜索</string>
+    <string name="current_charging_power">当前充电功率</string>
+    <string name="current_discharge_power">当前放电功率</string>
+    <string name="please_enter_keyword_search">请输入关键词搜索</string>
+
+    <string name="basic_survey">基础概况</string>
+    <string name="power_station_information">电站信息</string>
+    <string name="device_list">设备列表</string>
+    <string name="view_details">查看详情 ></string>
+    <string name="charging_power">充电功率</string>
+    <string name="discharge_power">放电功率</string>
+
+    <string name="basic_information">基础信息</string>
+    <string name="battery_board_information">电池板信息</string>
+    <string name="storage_battery_information">蓄电池信息</string>
+    <string name="load_information">负载信息</string>
+    <string name="geography_information">地理信息</string>
+
+    <string name="power_station_name">电站名称</string>
+    <string name="belong_to_project">所属项目</string>
+    <string name="install_date">安装日期</string>
+    <string name="design_vendor">设计厂商</string>
+
+
+    <string name="hint_power_station_name">请填写电站名称</string>
+    <string name="hint_belong_to_project">请选择所属项目</string>
+    <string name="hint_install_date">请填写安装日期</string>
+    <string name="hint_design_vendor">请填写设计厂商</string>
+
+    <string name="total_power_of_battery_board">电池板总功率</string>
+    <string name="type_of_battery_board">电池板类型</string>
+    <string name="the_quantity_of_battery_board_connected_in_series">电池板串联数量</string>
+    <string name="the_quantity_of_battery_board_connected_in_parallel">电池板并联数量</string>
+    <string name="power_of_single_battery_board">单块电池板功率</string>
+    <string name="total_quantity_of_battery_board">电池板总数量</string>
+    <string name="total_open_circuit_voltage_of_battery_board">电池板总开路电压</string>
+    <string name="total_working_current_of_battery_board">电池板总工作电流</string>
+    <string name="single_battery_board_vmp">单块电池板Vmp</string>
+    <string name="single_battery_board_voc">单块电池板Voc</string>
+    <string name="single_battery_board_imp">单块电池板Imp</string>
+    <string name="single_battery_board_isc">单块电池板Isc</string>
+    <string name="battery_board_remark">备注</string>
+
+    <string name="hint_total_power_of_battery_board">请填写电池板总功率</string>
+    <string name="hint_type_of_battery_board">请选择电池板类型</string>
+    <string name="hint_the_quantity_of_battery_board_connected_in_series">请填写电池板串联数量</string>
+    <string name="hint_the_quantity_of_battery_board_connected_in_parallel">请填写电池板并联数量</string>
+    <string name="hint_power_of_single_battery_board">请填写单块电池板功率</string>
+    <string name="hint_total_quantity_of_battery_board">请填写电池板总数量</string>
+    <string name="hint_total_open_circuit_voltage_of_battery_board">请填写电池板总开路电压</string>
+    <string name="hint_total_working_current_of_battery_board">请填写电池板总工作电流</string>
+    <string name="hint_single_battery_board_vmp">请填写单块电池板Vmp</string>
+    <string name="hint_single_battery_board_voc">请填写单块电池板Voc</string>
+    <string name="hint_single_battery_board_imp">请填写单块电池板Imp</string>
+    <string name="hint_single_battery_board_isc">请填写单块电池板Isc</string>
+
+    <string name="single_crystalline_silicon">单晶硅</string>
+    <string name="multi_crystalline_silicon">多晶硅</string>
+    <string name="non_crystalline_silicon">非晶硅</string>
+    <string name="other_crystalline_silicon">其他</string>
+
+    <string name="type_of_storage_battery">蓄电池类型</string>
+    <string name="single_battery_voltage">单节电池电压</string>
+    <string name="single_battery_capacity">单节电池容量</string>
+    <string name="the_quantity_of_battery_connected_in_series">电池串联数量</string>
+    <string name="the_quantity_of_battery_connected_in_parallel">电池并联数量</string>
+    <string name="total_quantity_of_battery">电池总数量</string>
+    <string name="total_battery_voltage">电池总电压</string>
+    <string name="total_battery_capacity">电池总容量</string>
+    <string name="storage_battery_remark">备注</string>
+
+    <string name="hint_type_of_storage_battery">请选择蓄电池类型</string>
+    <string name="hint_single_battery_voltage">请填写单节电池电压</string>
+    <string name="hint_single_battery_capacity">请填写单节电池容量</string>
+    <string name="hint_the_quantity_of_battery_connected_in_series">请填写电池串联数量</string>
+    <string name="hint_the_quantity_of_battery_connected_in_parallel">请填写电池并联数量</string>
+    <string name="hint_total_quantity_of_battery">请填写电池总数量</string>
+    <string name="hint_total_battery_voltage">请填写电池总电压</string>
+    <string name="hint_total_battery_capacity">请填写电池总容量</string>
+
+    <string name="custom">自定义</string>
+    <string name="open_mouth">开口</string>
+    <string name="seal">密封</string>
+    <string name="colloid">胶体</string>
+    <string name="lithium_battery">锂电池</string>
+
+    <string name="load_type">负载类型</string>
+    <string name="load_power">负载功率</string>
+
+    <string name="hint_load_type">请选择负载类型</string>
+    <string name="hint_load_power">请填写负载功率</string>
+
+    <string name="dc">直流</string>
+    <string name="ac">交流</string>
+    <string name="dc_and_ac">直流+交流</string>
+
+    <string name="coordinate">坐标</string>
+    <string name="maximum_annual_temperature">最高年气温</string>
+    <string name="minimum_annual_temperature">最低年气温</string>
+    <string name="geography_remark">备注</string>
+
+    <string name="hint_maximum_annual_temperature">请填写最高年气温</string>
+    <string name="hint_minimum_annual_temperature">请填写最低年气温</string>
+
+    <string name="editable_details">可编辑详细内容</string>
+    <string name="click_selection">点击选择</string>
+    <string name="click_add_power_station_photos">点击添加电站照片</string>
+
+    <string name="real_time_monitoring">实时监控</string>
+    <string name="real_time_curve">实时曲线</string>
+    <string name="data_detail">数据明细</string>
+    <string name="parameter_setting">参数设置</string>
+    <string name="device_information">设备信息</string>
+
+    <string name="storage_battery">蓄电池</string>
+    <string name="electricity_soc">电量SOC</string>
+    <string name="voltage">电压</string>
+    <string name="current">电流</string>
+    <string name="temperature">温度</string>
+    <string name="charging_state">充电状态</string>
+    <string name="minimum_voltage_on_the_same_day">当天最低电压</string>
+    <string name="maximum_voltage_on_the_same_day">当天最高电压</string>
+    <string name="storage_battery_state">蓄电池状态</string>
+    <string name="battery_board">电池板</string>
+    <string name="solar_panel_voltage">太阳能板电压</string>
+    <string name="solar_panel_current">太阳能板电流</string>
+    <string name="battery_board_state">电池板状态</string>
+    <string name="load">负载</string>
+    <string name="DC_load_voltage">直流负载电压</string>
+    <string name="DC_load_electricity">直流负载电流</string>
+    <string name="DC_load_power">直流负载功率</string>
+    <string name="DC_load_state">直流负载状态</string>
+    <string name="AC_load_voltage">交流负载电压</string>
+    <string name="AC_load_electricity">交流负载电流</string>
+    <string name="AC_load_power">交流负载功率</string>
+    <string name="AC_load_frequency">交流负载频率</string>
+    <string name="AC_load_state">交流负载状态</string>
+
+    <string name="unopened_charge">未开启充电</string>
+    <string name="charging_mode">启动充电模式</string>
+    <string name="mppt_charging_mode">mppt充电模式</string>
+    <string name="balanced_charging_mode">均衡充电模式</string>
+    <string name="upgrade_charging_mode">提升充电模式</string>
+    <string name="float_charging_mode">浮充充电模式</string>
+    <string name="current_limiting">限流(超功率)</string>
+
+    <string name="low_voltage_disconnect">低压断开</string>
+    <string name="under_voltage_alarm">欠压告警</string>
+    <string name="over_voltage_disconnect">超压断开</string>
+    <string name="battery_thermal">电池过温</string>
+
+    <string name="pv_over_voltage">PV超压</string>
+    <string name="pv_reverse">PV接反</string>
+    <string name="pv_over_power">PV超功率</string>
+
+    <string name="close">关</string>
+    <string name="open">开</string>
+    <string name="over_load">过载</string>
+    <string name="short_circuit">短路</string>
+
+    <string name="all">全部</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="maximum_value">最大值</string>
+    <string name="minimum_value">最小值</string>
+    <string name="average_value">平均值</string>
+
+    <string name="format_maximum_value">最大值:%1$s</string>
+    <string name="format_minimum_value">最小值:%1$s</string>
+    <string name="format_average_value">平均值:%1$s</string>
+
+    <string name="storage_battery_voltage">蓄电池电压</string>
+    <string name="charging_current">充电电流</string>
+    <string name="battery_temperature">蓄电池温度</string>
+    <string name="generating_capacity">发电量</string>
+
+    <string name="time">时间</string>
+    <string name="current_A">电流(A)</string>
+    <string name="voltage_V">电压(V)</string>
+    <string name="power_W">功率(W)</string>
+
+    <string name="storage_battery_parameter">蓄电池参数</string>
+    <string name="modify">修改</string>
+    <string name="nominal_capacity">标称容量</string>
+    <string name="overpressure_voltage">超压电压</string>
+    <string name="charge_limit_voltage">充电限制电压</string>
+    <string name="balance_charge_voltage">均衡充电电压</string>
+    <string name="lifting_charge_voltage">提升充电电压</string>
+    <string name="floating_charge_voltage">浮充充电电压</string>
+    <string name="lifting_charge_return_voltage">提升充电返回电压</string>
+    <string name="over_discharge_return_voltage">过放返回电压</string>
+    <string name="undervoltage_warning_voltage">欠压警告电压</string>
+    <string name="over_discharge_voltage">过放电压</string>
+    <string name="discharge_limit_voltage">放电限制电压</string>
+    <string name="over_discharge_delay_time">过放延迟时间</string>
+    <string name="balance_charge_time">均衡充电时间</string>
+    <string name="lifting_charge_time">提升充电时间</string>
+    <string name="balance_charge_interval">均衡充电间隔</string>
+    <string name="temperature_compensation_coefficient">温度补偿系数</string>
+
+    <string name="load_parameter">负载参数</string>
+    <string name="load_work_mode">负载工作模式</string>
+    <string name="light_control_delay_time">光控延时时间</string>
+    <string name="light_control_voltage">光控电压</string>
+
+    <string name="inverter_parameter">逆变器参数</string>
+
+    <string name="editing_device">编辑设备</string>
+    <string name="save">保存</string>
+    <string name="save_success">保存成功</string>
+    <string name="product_model">产品型号</string>
+    <string name="product_type">产品类型</string>
+    <string name="software_version">软件版本</string>
+    <string name="hardware_version">硬件版本</string>
+    <string name="device_address">设备地址</string>
+    <string name="device_serial_number">设备序列号</string>
+
+    <string name="hint_product_model">请填写产品型号</string>
+    <string name="hint_product_type">请填写产品类型</string>
+    <string name="hint_software_version">请填写软件版本</string>
+    <string name="hint_hardware_version">请填写硬件版本</string>
+    <string name="hint_device_address">请填写设备地址</string>
+    <string name="hint_device_serial_number">请填写设备序列号</string>
+
+    <string name="format_product_model">产品型号: %1$s</string>
+    <string name="format_product_type">产品类型: %1$s</string>
+    <string name="format_software_version">软件版本: %1$s</string>
+    <string name="format_hardware_version">硬件版本: %1$s</string>
+    <string name="format_device_id">设备ID: %1$s</string>
+
+    <string name="project_name">项目名称</string>
+    <string name="hint_project_name">请填写项目名称</string>
+    <string name="company_name">公司名称</string>
+    <string name="hint_company_name">请填写公司名称</string>
+    <string name="personal_name">个人名称</string>
+    <string name="hint_personal_name">请填写个人名称</string>
+    <string name="detailed_address">详细地址</string>
+    <string name="hint_detailed_address">请填写详细地址</string>
+    <string name="please_fill_in_your_project_information">请填写您的项目信息</string>
+    <string name="new_build_project">新建项目</string>
+    <string name="new_build_success">新建成功</string>
+
+    <string name="map">地图</string>
+    <string name="storage_battery_voltage_colon">蓄电池电压:</string>
+    <string name="current_power_generation_colon">当前发电功率:</string>
+    <string name="current_load_power_colon">当前负载功率:</string>
+    <string name="power_station_address_colon">电站地址:</string>
+
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="hint_delete">确定要删除吗</string>
+    <string name="delete_success">删除成功</string>
+
+    <string name="format_alarm_description_colon">报警描述: %1$s</string>
+    <string name="format_disappearance_time_colon">消失时间: %1$s</string>
+
+    <string name="add_device">添加设备</string>
+
+    <string name="no_value">修改参数不能为空</string>
+
+
+
+
+</resources>
