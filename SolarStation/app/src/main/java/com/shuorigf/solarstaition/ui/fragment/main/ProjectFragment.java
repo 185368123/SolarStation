@@ -22,6 +22,7 @@ import com.shuorigf.solarstaition.adapter.ProjectElectricityAdapter;
 import com.shuorigf.solarstaition.adapter.ProjectPowerStationAdapter;
 import com.shuorigf.solarstaition.adapter.ProjectSaveAdapter;
 import com.shuorigf.solarstaition.base.BaseFragment;
+import com.shuorigf.solarstaition.constants.Constants;
 import com.shuorigf.solarstaition.data.IconText;
 import com.shuorigf.solarstaition.data.SingleBeans;
 import com.shuorigf.solarstaition.data.exception.ResponseMessageException;
@@ -48,6 +49,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/9/28.
@@ -154,7 +156,7 @@ public class ProjectFragment extends BaseFragment {
                         SingleBeans.getInstance().setProjectListInfos(list);
                         if (isShowPop) {
                             showProjectPopup();
-                        }else {
+                        } else {
                             if (mProjectList != null && mProjectList.size() > 0) {
                                 mProjectListInfo = mProjectList.get(0);
                                 mTitleTv.setText(mProjectListInfo.projectName);
@@ -216,7 +218,7 @@ public class ProjectFragment extends BaseFragment {
 
     private void initElectricity(ProjectDataInfo projectDataInfo) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i<mElectricityTitle.length(); i++) {
+        for (int i = 0; i < mElectricityTitle.length(); i++) {
             list.add(mElectricityTitle.getResourceId(i, 0));
         }
         ProjectElectricityAdapter projectElectricityAdapter = new ProjectElectricityAdapter(list, projectDataInfo);
@@ -227,7 +229,7 @@ public class ProjectFragment extends BaseFragment {
 
     private void initChart(ProjectDataInfo projectDataInfo) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i<mChartTitle.length(); i++) {
+        for (int i = 0; i < mChartTitle.length(); i++) {
             list.add(mChartTitle.getResourceId(i, 0));
         }
         ProjectChartAdapter projectChartAdapter = new ProjectChartAdapter(list, projectDataInfo);
@@ -238,7 +240,7 @@ public class ProjectFragment extends BaseFragment {
 
     private void initSave(ProjectDataInfo projectDataInfo) {
         List<IconText> list = new ArrayList<>();
-        for (int i = 0; i<mSaveTitle.length(); i++) {
+        for (int i = 0; i < mSaveTitle.length(); i++) {
             list.add(new IconText(mSaveTitle.getResourceId(i, 0), mSaveIcon.getResourceId(i, 0)));
         }
         ProjectSaveAdapter projectSaveAdapter = new ProjectSaveAdapter(list, projectDataInfo);
@@ -248,7 +250,7 @@ public class ProjectFragment extends BaseFragment {
     }
 
     private void initStationList(List<StationListInfo> list) {
-        ProjectPowerStationAdapter projectPowerStationAdapter = new ProjectPowerStationAdapter(list);
+        ProjectPowerStationAdapter projectPowerStationAdapter = new ProjectPowerStationAdapter(list,mProjectListInfo.projectId);
         mPowerStationRv.setAdapter(projectPowerStationAdapter);
 
     }
@@ -258,7 +260,12 @@ public class ProjectFragment extends BaseFragment {
      */
     @Override
     protected void initEvent() {
-
+        mRxManager.on(Constants.INIT_STATION_DETAIL, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                getProjectList(false);
+            }
+        });
     }
 
 
@@ -269,7 +276,7 @@ public class ProjectFragment extends BaseFragment {
             case R.id.tv_project_title:
                 if (mProjectList == null) {
                     getProjectList(true);
-                }else {
+                } else {
                     showProjectPopup();
                 }
                 break;
@@ -312,7 +319,7 @@ public class ProjectFragment extends BaseFragment {
         popupProjectAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mProjectListInfo = (ProjectListInfo)adapter.getItem(position);
+                mProjectListInfo = (ProjectListInfo) adapter.getItem(position);
                 if (mProjectListInfo != null) {
                     mTitleTv.setText(mProjectListInfo.projectName);
                     initStationList(mProjectListInfo.stationListInfo);
@@ -334,7 +341,7 @@ public class ProjectFragment extends BaseFragment {
         // 设置PopupWindow是否能响应点击事件
         mPopupWindow.setTouchable(true);
 
-        mPopupWindow.showAsDropDown(mToolbar, (mToolbar.getWidth() - ConvertUtils.dp2px(getContext(), 250))/2, 0);
+        mPopupWindow.showAsDropDown(mToolbar, (mToolbar.getWidth() - ConvertUtils.dp2px(getContext(), 250)) / 2, 0);
 
     }
 
@@ -347,7 +354,7 @@ public class ProjectFragment extends BaseFragment {
                         mProjectList = list;
                         if (mProjectList != null) {
                             for (ProjectListInfo info : mProjectList) {
-                                if(TextUtils.equals(info.projectId, id)) {
+                                if (TextUtils.equals(info.projectId, id)) {
                                     mProjectListInfo = info;
                                     mTitleTv.setText(mProjectListInfo.projectName);
                                     initStationList(mProjectListInfo.stationListInfo);

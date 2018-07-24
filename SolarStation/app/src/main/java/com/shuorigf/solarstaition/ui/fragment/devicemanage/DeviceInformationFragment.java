@@ -14,15 +14,27 @@ import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.adapter.DeviceInformationAdapter;
 import com.shuorigf.solarstaition.adapter.itemdecoration.UniversalDividerItemDecoration;
 import com.shuorigf.solarstaition.base.BaseFragment;
+import com.shuorigf.solarstaition.constants.Constants;
+import com.shuorigf.solarstaition.data.exception.ResponseMessageException;
+import com.shuorigf.solarstaition.data.flowable.HttpResultLoadingTransformer;
+import com.shuorigf.solarstaition.data.flowable.HttpResultTransformer;
 import com.shuorigf.solarstaition.data.response.device.DeviceListInfo;
+import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.ui.activity.EditingDeviceActivity;
 import com.shuorigf.solarstaition.ui.fragment.MessageDialogFragment;
 import com.shuorigf.solarstaition.util.ConvertUtils;
+import com.shuorigf.solarstaition.util.DisposableManager;
+import com.shuorigf.solarstaition.util.LogUtils;
+import com.shuorigf.solarstaition.util.RetrofitUtil;
+import com.shuorigf.solarstaition.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/15.
@@ -34,6 +46,11 @@ public class DeviceInformationFragment extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.rv_device_information_content)
     RecyclerView mContentRv;
+
+
+    private DeviceService mDeviceService;
+
+    private String mStationId;
 
     private MessageDialogFragment mMessageDialogFragment;
 
@@ -62,7 +79,11 @@ public class DeviceInformationFragment extends BaseFragment {
      */
     @Override
     public void init(Bundle savedInstanceState) {
-
+        mDeviceService = RetrofitUtil.create(DeviceService.class);
+        mStationId = getActivity().getIntent().getStringExtra(Constants.STATION_ID);
+        mContentRv.addItemDecoration(new UniversalDividerItemDecoration(getContext(),
+                UniversalDividerItemDecoration.HORIZONTAL_LIST,
+                ConvertUtils.dp2px(getContext(), 10), ContextCompat.getColor(getContext(), R.color.divider)));
     }
 
     /**
@@ -71,29 +92,70 @@ public class DeviceInformationFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        List<DeviceListInfo> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new DeviceListInfo());
+        getDeviceList();
+    }
+
+    private void getDeviceList() {
+        if (mStationId == null) {
+            return;
         }
+        Disposable disposable = mDeviceService.getDeviceList(mStationId)
+                .compose(new HttpResultTransformer<List<DeviceListInfo>>())
+                .subscribeWith(new DisposableSubscriber<List<DeviceListInfo>>() {
+                    @Override
+                    public void onNext(List<DeviceListInfo> list) {
+                        initDeviceList(list);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (t instanceof ResponseMessageException) {
+                            ResponseMessageException response = (ResponseMessageException) t;
+                            ToastUtil.showShortToast(getContext(), response.getErrorMessage());
+                        }
+                        if (mRefreshLayout.isRefreshing()) {
+                            mRefreshLayout.finishRefresh();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (mRefreshLayout.isRefreshing()) {
+                            mRefreshLayout.finishRefresh();
+                        }
+                    }
+                });
+
+        DisposableManager.getInstance().add(this, disposable);
+
+    }
+
+    private void initDeviceList(List<DeviceListInfo> list) {
         DeviceInformationAdapter deviceInformationAdapter = new DeviceInformationAdapter(list);
         deviceInformationAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                final DeviceListInfo deviceListInfo = (DeviceListInfo)baseQuickAdapter.getData().get(i);
                 switch (view.getId()) {
                     case R.id.iv_swipe_edit:
                         Intent intent = new Intent(getContext(), EditingDeviceActivity.class);
                         startActivity(intent);
                         break;
-
                     case R.id.iv_swipe_delete:
                         mMessageDialogFragment = MessageDialogFragment.newInstance();
                         mMessageDialogFragment.setShowTitle(false).setMessage("确定要删除吗")
-                                    .setOnNegativeClickListener(new MessageDialogFragment.OnNegativeClickListener() {
-                                        @Override
-                                        public void onNegativeClick(MessageDialogFragment fragment, View cancel) {
-                                            mMessageDialogFragment.dismiss();
-                                        }
-                                    });
+                                .setOnNegativeClickListener(new MessageDialogFragment.OnNegativeClickListener() {
+                                    @Override
+                                    public void onNegativeClick(MessageDialogFragment fragment, View cancel) {
+                                        mMessageDialogFragment.dismiss();
+                                    }
+                                }) .setOnPositiveClickListener(new MessageDialogFragment.OnPositiveClickListener() {
+                            @Override
+                            public void onPositiveClick(MessageDialogFragment fragment, View ok) {
+                                delDevice(deviceListInfo.id);
+                                fragment.dismiss();
+                            }
+                        });
                         mMessageDialogFragment.show(getActivity().getSupportFragmentManager(), "");
                         break;
                 }
@@ -105,6 +167,36 @@ public class DeviceInformationFragment extends BaseFragment {
         mContentRv.setAdapter(deviceInformationAdapter);
     }
 
+
+    private void delDevice(String deviceId) {
+        if (deviceId == null) {
+            return;
+        }
+        Disposable disposable = mDeviceService.delDevice(deviceId)
+                .compose(new HttpResultLoadingTransformer<Void>())
+                .subscribeWith(new DisposableSubscriber<Void>() {
+                    @Override
+                    public void onNext(Void s) {
+                        ToastUtil.showShortToast(getContext(), R.string.delete_success);
+                        mRxManager.post(Constants.REFSH_DEVICE_DATA,null);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (t instanceof ResponseMessageException) {
+                            ResponseMessageException response = (ResponseMessageException) t;
+                            ToastUtil.showShortToast(getContext(), response.getErrorMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+        DisposableManager.getInstance().add(this, disposable);
+
+    }
     /**
      * init event
      */
@@ -114,6 +206,13 @@ public class DeviceInformationFragment extends BaseFragment {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 mRefreshLayout.finishRefresh();
+            }
+        });
+
+        mRxManager.on(Constants.REFSH_DEVICE_DATA, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                getDeviceList();
             }
         });
     }

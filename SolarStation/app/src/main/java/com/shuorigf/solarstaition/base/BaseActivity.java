@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.util.FragmentUtils;
+import com.shuorigf.solarstaition.util.RxManager;
 
 import java.util.List;
 
@@ -22,11 +23,13 @@ import pub.devrel.easypermissions.EasyPermissions;
 public abstract class BaseActivity extends AppCompatActivity implements IContainer, EasyPermissions.PermissionCallbacks {
 
     protected Toolbar toolbar;
+    public RxManager mRxManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
+        mRxManager=new RxManager();
         toolbar = findViewById(getToolbarId());
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -78,4 +81,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IContain
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mRxManager!=null) {
+            mRxManager.clear();
+        }
+    }
 }

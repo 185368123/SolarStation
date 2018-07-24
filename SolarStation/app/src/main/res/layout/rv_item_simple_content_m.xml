@@ -22,6 +22,8 @@
         android:layout_toEndOf="@+id/tv_title"
         android:layout_toRightOf="@+id/tv_title"
         android:drawablePadding="10dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
         android:gravity="end"
         android:singleLine="true" />
 

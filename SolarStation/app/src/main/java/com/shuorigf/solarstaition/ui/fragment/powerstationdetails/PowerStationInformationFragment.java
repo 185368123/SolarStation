@@ -30,6 +30,7 @@ import butterknife.BindArray;
 import butterknife.BindView;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/13.
@@ -121,16 +122,16 @@ public class PowerStationInformationFragment extends BaseFragment {
 
     }
 
-    private void initStationDetail(StationDetailInfo stationDetailInfo){
-        SingleBeans.getInstance().setSaveParams(new StationSaveParams(mStationId, stationDetailInfo.name, stationDetailInfo.projectId, stationDetailInfo. installTime, stationDetailInfo. designer, stationDetailInfo. photo,
-                stationDetailInfo. panelPower, stationDetailInfo. panelType+"", stationDetailInfo. panelSeriesCount, stationDetailInfo. panelParallelCount,
-                stationDetailInfo. panelCount, stationDetailInfo. panelVoltage, stationDetailInfo. panelCurrent, stationDetailInfo. panelSinglePower,
-                stationDetailInfo. panelSingleVmp, stationDetailInfo. panelSingleVoc, stationDetailInfo. panelSingleImp, stationDetailInfo. panelSingleIsc,
-                stationDetailInfo. panelRemark, stationDetailInfo. batteryType+"", stationDetailInfo. batterySingleVoltage, stationDetailInfo. batterySingleCapacity,
-                stationDetailInfo. batterySeriesCount, stationDetailInfo. batteryParallelCount, stationDetailInfo. batteryCount, stationDetailInfo. batteryVoltage,
-                stationDetailInfo. batteryCapacity, stationDetailInfo. batteryRemark, stationDetailInfo. loadType+"", stationDetailInfo. loadPower, stationDetailInfo. countryId,
-                stationDetailInfo. provinceId, stationDetailInfo. address, stationDetailInfo. longitude, stationDetailInfo. latitude, stationDetailInfo. altitude, stationDetailInfo. maxAnnualTemper,
-                stationDetailInfo. minAnnualTemper, stationDetailInfo. geoRemark));
+    private void initStationDetail(StationDetailInfo stationDetailInfo) {
+        SingleBeans.getInstance().setSaveParams(new StationSaveParams(mStationId, stationDetailInfo.name, stationDetailInfo.projectId, stationDetailInfo.installTime, stationDetailInfo.designer, stationDetailInfo.photo,
+                stationDetailInfo.panelPower, stationDetailInfo.panelType + "", stationDetailInfo.panelSeriesCount, stationDetailInfo.panelParallelCount,
+                stationDetailInfo.panelCount, stationDetailInfo.panelVoltage, stationDetailInfo.panelCurrent, stationDetailInfo.panelSinglePower,
+                stationDetailInfo.panelSingleVmp, stationDetailInfo.panelSingleVoc, stationDetailInfo.panelSingleImp, stationDetailInfo.panelSingleIsc,
+                stationDetailInfo.panelRemark, stationDetailInfo.batteryType + "", stationDetailInfo.batterySingleVoltage, stationDetailInfo.batterySingleCapacity,
+                stationDetailInfo.batterySeriesCount, stationDetailInfo.batteryParallelCount, stationDetailInfo.batteryCount, stationDetailInfo.batteryVoltage,
+                stationDetailInfo.batteryCapacity, stationDetailInfo.batteryRemark, stationDetailInfo.loadType + "", stationDetailInfo.loadPower, stationDetailInfo.countryId,
+                stationDetailInfo.provinceId, stationDetailInfo.address, stationDetailInfo.longitude, stationDetailInfo.latitude, stationDetailInfo.altitude, stationDetailInfo.maxAnnualTemper,
+                stationDetailInfo.minAnnualTemper, stationDetailInfo.geoRemark));
         GlideApp.with(getContext())
                 .load(stationDetailInfo.photo)
                 .placeholder(R.mipmap.ic_launcher)
@@ -151,6 +152,11 @@ public class PowerStationInformationFragment extends BaseFragment {
      */
     @Override
     protected void initEvent() {
-
+        mRxManager.on(Constants.INIT_STATION_DETAIL, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                getStationDetail();
+            }
+        });
     }
 }

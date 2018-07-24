@@ -25,6 +25,7 @@ import com.shuorigf.solarstaition.data.response.device.DeviceListInfo;
 import com.shuorigf.solarstaition.data.response.station.StationDataInfo;
 import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.data.service.StationService;
+import com.shuorigf.solarstaition.ui.activity.AddDeviceActivity;
 import com.shuorigf.solarstaition.ui.activity.DeviceListActivity;
 import com.shuorigf.solarstaition.util.DisposableManager;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
@@ -38,6 +39,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/12.
@@ -237,12 +239,15 @@ public class BasicSurveyFragment extends BaseFragment {
     }
 
     private void initDeviceList(List<DeviceListInfo> list) {
-        PowerStationDetailsDeviceAdapter powerStationDetailsDeviceAdapter = new PowerStationDetailsDeviceAdapter(list);
+        PowerStationDetailsDeviceAdapter powerStationDetailsDeviceAdapter = new PowerStationDetailsDeviceAdapter(list,mStationId);
         View headerView = View.inflate(getContext(), R.layout.rv_item_power_station_details_device_header, null);
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getContext(), AddDeviceActivity.class);
+                intent.putExtra(Constants.STATION_ID, mStationId);
+                intent.putExtra(Constants.PROJECT_ID, getActivity().getIntent().getStringExtra(Constants.PROJECT_ID));
+                startActivity(intent);
             }
         });
         powerStationDetailsDeviceAdapter.setHeaderViewAsFlow(true);
@@ -256,7 +261,12 @@ public class BasicSurveyFragment extends BaseFragment {
      */
     @Override
     protected void initEvent() {
-
+        mRxManager.on(Constants.REFSH_DEVICE_DATA, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+               getDeviceList();
+            }
+        });
     }
 
 

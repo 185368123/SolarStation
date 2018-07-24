@@ -19,10 +19,13 @@ import java.util.List;
  */
 
 public class ProjectPowerStationAdapter extends BaseQuickAdapter<StationListInfo, BaseViewHolder> {
+    String project_id;
 
-    public ProjectPowerStationAdapter(List<StationListInfo> data) {
+    public ProjectPowerStationAdapter(List<StationListInfo> data,String project_id) {
         super(R.layout.rv_item_project_power_station, data);
+        this.project_id=project_id;
     }
+
     @Override
     protected void convert(BaseViewHolder baseViewHolder, final StationListInfo stationListInfo) {
         ImageView image = baseViewHolder.getView(R.id.iv_icon);
@@ -46,6 +49,7 @@ public class ProjectPowerStationAdapter extends BaseQuickAdapter<StationListInfo
                 Intent intent = new Intent(view.getContext(), PowerStationDetailsActivity.class);
                 intent.putExtra(Constants.STATION_NAME, stationListInfo.stationName);
                 intent.putExtra(Constants.STATION_ID, stationListInfo.stationId);
+                intent.putExtra(Constants.PROJECT_ID, project_id);
                 view.getContext().startActivity(intent);
             }
         });

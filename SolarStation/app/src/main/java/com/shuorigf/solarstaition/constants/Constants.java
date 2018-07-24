@@ -23,6 +23,7 @@ public class Constants {
     public static final String DIALOG_MENU_TYPE = "dialog_menu_type";
     public static final String REAL_TIME_CURVE_CHART_TYPE = "real_time_curve_chart_type";
     public static final String STATION_ID = "station_id";
+    public static final String PROJECT_ID = "project_id";
     public static final String STATION_NAME = "station_name";
     public static final String DEVICE_ID = "device_id";
     public static final String DEVICE_NAME = "device_name";
@@ -32,5 +33,15 @@ public class Constants {
 
     //request code
     public static final int REQUEST_CODE_SELECT_STATION = 100;
+
+    /**
+     * The constant DEBUG_TAG.
+     */
+    public static final String DEBUG_TAG = "logger";// LogCat的标记
+
+    //RxBus Key
+    public static final String INIT_STATION_DETAIL = "initStationDetail";
+    public static final String REAL_TIME_CURVE_DATA = "initRealTimeData";
+    public static final String REFSH_DEVICE_DATA = "refsh_device_data";
 
 }

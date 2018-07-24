@@ -13,6 +13,10 @@ import com.shuorigf.solarstaition.data.response.login.UserInfo;
 
 public class ApiConstants {
 
+
+
+
+
     public final static String DEFAULT_WEB_ROOT = "http://station-iot.com/";// 默认网点
     public final static String API_VERSION = "api/";
 

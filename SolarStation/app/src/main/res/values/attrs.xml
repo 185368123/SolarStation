@@ -307,7 +307,19 @@
 
     <string-array name="alarm_type_title">
         <item>@string/type</item>
-
+        <item>@string/type_1</item>
+        <item>@string/type_2</item>
+        <item>@string/type_3</item>
+        <item>@string/type_4</item>
+        <item>@string/type_5</item>
+        <item>@string/type_6</item>
+        <item>@string/type_7</item>
+        <item>@string/type_8</item>
+        <item>@string/type_9</item>
+        <item>@string/type_10</item>
+        <item>@string/type_11</item>
+        <item>@string/type_12</item>
+        <item>@string/type_13</item>
     </string-array>
 
     <string-array name="alarm_marked_title">
@@ -316,7 +328,4 @@
         <item>@string/already_unmarked</item>
     </string-array>
 
-    <string-array name="alarm_device_title">
-        <item>@string/all_device</item>
-    </string-array>
 </resources>

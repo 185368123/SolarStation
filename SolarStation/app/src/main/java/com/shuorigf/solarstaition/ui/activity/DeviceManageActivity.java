@@ -13,6 +13,7 @@ import com.shuorigf.solarstaition.base.BaseActivity;
 import com.shuorigf.solarstaition.constants.Constants;
 import com.shuorigf.solarstaition.ui.fragment.devicemanage.DataDetailFragment;
 import com.shuorigf.solarstaition.ui.fragment.devicemanage.DeviceInformationFragment;
+import com.shuorigf.solarstaition.ui.fragment.devicemanage.DeviceListFragment;
 import com.shuorigf.solarstaition.ui.fragment.devicemanage.ParameterSettingFragment;
 import com.shuorigf.solarstaition.ui.fragment.devicemanage.RealTimeCurveFragment;
 import com.shuorigf.solarstaition.ui.fragment.devicemanage.RealTimeMonitoringFragment;
@@ -61,13 +62,17 @@ public class DeviceManageActivity extends BaseActivity {
     }
 
 
+    public String getStationId(){
+        return getIntent().getStringExtra(Constants.STATION_ID);
+    }
+
     private void initVP() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(RealTimeMonitoringFragment.newInstance());
         fragments.add(RealTimeCurveFragment.newInstance());
         fragments.add(DataDetailFragment.newInstance());
         fragments.add(ParameterSettingFragment.newInstance());
-        fragments.add(DeviceInformationFragment.newInstance());
+        fragments.add(DeviceListFragment.newInstance());
 
         mViewPager.setAdapter(new CommonFragmentPagerAdapter(getSupportFragmentManager(), fragments) {
             @Override

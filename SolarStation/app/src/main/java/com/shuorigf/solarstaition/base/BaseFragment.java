@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shuorigf.solarstaition.util.RxManager;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
 
     private boolean isFirstLoad = true;
     private Unbinder unbinder;
+    public RxManager mRxManager;
 
     protected View root;
 
@@ -30,6 +33,7 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (root == null) root = inflater.inflate(getLayoutRes(), container, false);
+        mRxManager=new RxManager();
         unbinder = ButterKnife.bind(this, root);
         init(savedInstanceState);
         initEvent();
@@ -74,6 +78,9 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        if(mRxManager!=null) {
+            mRxManager.clear();
+        }
     }
 
     //权限管理

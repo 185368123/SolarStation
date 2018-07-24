@@ -67,7 +67,8 @@
             <!-- 开发者申请的key -->
         </meta-data>
 
-        <activity android:name=".ui.activity.StationInformationChangeActivity"></activity>
+        <activity android:name=".ui.activity.StationInformationChangeActivity" />
+        <activity android:name=".ui.activity.AddDeviceActivity"></activity>
     </application>
 
 </manifest>

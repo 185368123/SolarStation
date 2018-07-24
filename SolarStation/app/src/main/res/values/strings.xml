@@ -58,6 +58,21 @@
     <string name="log_out">退出登录</string>
 
     <string name="type">类型</string>
+    <string name="type_1">太阳板反接</string>
+    <string name="type_2">太阳板工作点超压</string>
+    <string name="type_3">太阳板逆流</string>
+    <string name="type_4">光伏输入端超压</string>
+    <string name="type_5">光伏输入端短路</string>
+    <string name="type_6">光伏输入功率过大</string>
+    <string name="type_7">外部环境温度过高</string>
+    <string name="type_8">控制器温度过高</string>
+    <string name="type_9">负载功率过大或负载过流</string>
+    <string name="type_10">负载短路</string>
+    <string name="type_11">蓄电池超压</string>
+    <string name="type_12">蓄电池欠压</string>
+    <string name="type_13">蓄电池过放</string>
+
+
     <string name="alarm_marked">标注</string>
     <string name="already_marked">已标注</string>
     <string name="already_unmarked">未标注</string>
@@ -278,12 +293,14 @@
     <string name="editing_device">编辑设备</string>
     <string name="save">保存</string>
     <string name="save_success">保存成功</string>
+    <string name="add_success">添加成功</string>
     <string name="product_model">产品型号</string>
     <string name="product_type">产品类型</string>
     <string name="software_version">软件版本</string>
     <string name="hardware_version">硬件版本</string>
     <string name="device_address">设备地址</string>
     <string name="device_serial_number">设备序列号</string>
+    <string name="device_pn_number">PN码</string>
 
     <string name="hint_product_model">请填写产品型号</string>
     <string name="hint_product_type">请填写产品类型</string>
@@ -291,6 +308,7 @@
     <string name="hint_hardware_version">请填写硬件版本</string>
     <string name="hint_device_address">请填写设备地址</string>
     <string name="hint_device_serial_number">请填写设备序列号</string>
+    <string name="hint_device_pn_number">请填写PN码</string>
 
     <string name="format_product_model">产品型号: %1$s</string>
     <string name="format_product_type">产品类型: %1$s</string>
@@ -325,10 +343,9 @@
     <string name="format_disappearance_time_colon">消失时间: %1$s</string>
 
     <string name="add_device">添加设备</string>
+    <string name="add_now">立刻添加</string>
 
     <string name="no_value">修改参数不能为空</string>
-
-
 
 
 </resources>

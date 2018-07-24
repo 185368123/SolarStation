@@ -80,6 +80,9 @@ public class EditingDeviceAdapter extends BaseQuickAdapter<Integer, BaseViewHold
                     case R.string.device_serial_number:
                         deviceSaveParams.serialNo = editable.toString().trim();
                         break;
+                    case R.string.device_pn_number:
+                        deviceSaveParams.pn_code = editable.toString().trim();
+                        break;
 
                 }
             }

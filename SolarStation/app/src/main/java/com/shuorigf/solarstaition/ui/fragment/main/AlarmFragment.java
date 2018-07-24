@@ -23,8 +23,10 @@ import com.shuorigf.solarstaition.data.exception.ResponseMessageException;
 import com.shuorigf.solarstaition.data.flowable.HttpResultTransformer;
 import com.shuorigf.solarstaition.data.params.alarm.AlarmListParams;
 import com.shuorigf.solarstaition.data.response.alarm.AlarmListInfo;
+import com.shuorigf.solarstaition.data.response.device.DeviceListInfo;
 import com.shuorigf.solarstaition.data.response.station.StationListInfo;
 import com.shuorigf.solarstaition.data.service.AlarmService;
+import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.data.service.StationService;
 import com.shuorigf.solarstaition.ui.activity.SearchActivity;
 import com.shuorigf.solarstaition.util.ConvertUtils;
@@ -51,12 +53,12 @@ import io.reactivex.subscribers.DisposableSubscriber;
  */
 
 public class AlarmFragment extends BaseFragment {
-    @BindArray(R.array.alarm_type_title)
-    TypedArray alarm_type_title;
     @BindArray(R.array.alarm_marked_title)
     TypedArray alarm_marked_title;
-    @BindArray(R.array.alarm_device_title)
-    TypedArray alarm_device_title;
+    @BindArray(R.array.alarm_type_title)
+    TypedArray alarm_type_title;
+
+
     private volatile static AlarmFragment instanceFragment;
 
     @BindView(R.id.rv_alarm_content)
@@ -76,7 +78,9 @@ public class AlarmFragment extends BaseFragment {
 
     private AlarmService mAlarmService;
     private StationService mStationService;
+    private DeviceService mDeviceService;
     private List<StationListInfo> mStationList;
+    private List<DeviceListInfo> mDeviceList = new ArrayList<>();
 
     private AlarmListParams mAlarmListParams = new AlarmListParams();
 
@@ -121,9 +125,14 @@ public class AlarmFragment extends BaseFragment {
     public void init(Bundle savedInstanceState) {
         mAlarmService = RetrofitUtil.create(AlarmService.class);
         mStationService = RetrofitUtil.create(StationService.class);
+        mDeviceService = RetrofitUtil.create(DeviceService.class);
         mContentRv.addItemDecoration(new UniversalDividerItemDecoration(getContext(),
                 UniversalDividerItemDecoration.HORIZONTAL_LIST,
                 ConvertUtils.dp2px(getContext(), 10), ContextCompat.getColor(getContext(), R.color.divider)));
+        tvAlarmTime.setSelected(true);
+        tvAlarmType.setSelected(true);
+        tvAlarmDevice.setSelected(true);
+        tvAlarmMarked.setSelected(true);
     }
 
     /**
@@ -147,6 +156,7 @@ public class AlarmFragment extends BaseFragment {
                             mAlarmListParams.stationId = mStationList.get(0).stationId;
                             mTitleTv.setText(mStationList.get(0).stationName);
                             getAlarmList();
+                            getDeviceList();
                         }
                     }
 
@@ -166,6 +176,41 @@ public class AlarmFragment extends BaseFragment {
 
         DisposableManager.getInstance().add(this, disposable);
 
+    }
+
+    private void getDeviceList() {
+        if (mAlarmListParams.stationId == null) {
+            return;
+        }
+        Disposable disposable = mDeviceService.getDeviceList(mAlarmListParams.stationId)
+                .compose(new HttpResultTransformer<List<DeviceListInfo>>())
+                .subscribeWith(new DisposableSubscriber<List<DeviceListInfo>>() {
+                    @Override
+                    public void onNext(List<DeviceListInfo> list) {
+                        initDeviceList(list);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (t instanceof ResponseMessageException) {
+                            ResponseMessageException response = (ResponseMessageException) t;
+                            ToastUtil.showShortToast(getContext(), response.getErrorMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        DisposableManager.getInstance().add(this, disposable);
+
+    }
+
+    private void initDeviceList(List<DeviceListInfo> list) {
+        mDeviceList.clear();
+        mDeviceList.addAll(list);
     }
 
 
@@ -216,7 +261,6 @@ public class AlarmFragment extends BaseFragment {
     private void initAlarmList(List<AlarmListInfo> list) {
         AlarmContentAdapter alarmContentAdapter = new AlarmContentAdapter(list);
         mContentRv.setAdapter(alarmContentAdapter);
-
     }
 
     /**
@@ -227,7 +271,7 @@ public class AlarmFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.tv_alarm_title, R.id.iv_alarm_search, R.id.tv_alarm_time,R.id.tv_alarm_type, R.id.tv_alarm_marked, R.id.tv_alarm_device})
+    @OnClick({R.id.tv_alarm_title, R.id.iv_alarm_search, R.id.tv_alarm_time, R.id.tv_alarm_type, R.id.tv_alarm_marked, R.id.tv_alarm_device})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -244,11 +288,13 @@ public class AlarmFragment extends BaseFragment {
                 showTimePv();
                 break;
             case R.id.tv_alarm_type:
+                showTypePv(tvAlarmType);
                 break;
             case R.id.tv_alarm_marked:
                 showMarkedPv(tvAlarmMarked);
                 break;
             case R.id.tv_alarm_device:
+                showDevicePv(tvAlarmDevice);
                 break;
         }
     }
@@ -261,8 +307,13 @@ public class AlarmFragment extends BaseFragment {
             switch (requestCode) {
                 case Constants.REQUEST_CODE_SELECT_STATION:
                     if (data != null) {
+                        mAlarmListParams = new AlarmListParams();
                         mAlarmListParams.stationId = data.getStringExtra(Constants.STATION_ID);
                         mTitleTv.setText(data.getStringExtra(Constants.STATION_NAME));
+                        tvAlarmType.setText(R.string.type);
+                        tvAlarmMarked.setText(R.string.alarm_marked);
+                        tvAlarmDevice.setText(R.string.all_device);
+                        getDeviceList();
                         getAlarmList();
                     }
                     break;
@@ -280,7 +331,9 @@ public class AlarmFragment extends BaseFragment {
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                Log.e("111", "onTimeSelect: " + TimeUtils.date2String(date));
+                mAlarmListParams.date = TimeUtils.date2StringYMD(date);
+                tvAlarmTime.setText(TimeUtils.date2StringYMD(date));
+                getAlarmList();
             }
         })
                 .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
@@ -299,7 +352,14 @@ public class AlarmFragment extends BaseFragment {
         OptionsPickerView mOptionsPickerView = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-
+                if (options1 == 0){
+                    mAlarmListParams.alarmType = null;
+                    view.setText(R.string.type);
+                }else{
+                    mAlarmListParams.alarmType=alarm_type_title.getString(options1);
+                    view.setText(alarm_type_title.getString(options1));
+                }
+                getAlarmList();
             }
         })
                 .setSubCalSize(15)//确定和取消文字大小
@@ -314,17 +374,20 @@ public class AlarmFragment extends BaseFragment {
         for (int i = 0; i < alarm_type_title.length(); i++) {
             list.add(alarm_type_title.getString(i));
         }
-
         mOptionsPickerView.setPicker(list);//添加数据源
         mOptionsPickerView.show();
     }
+
     private void showMarkedPv(final TextView view) {
         OptionsPickerView mOptionsPickerView = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-              view.setText(alarm_marked_title.getString(options1));
-              //TODO 设置标记类型
-                initData();
+                view.setText(alarm_marked_title.getString(options1));
+                if (options1==0){
+                    mAlarmListParams.label = null;
+                }else
+                    mAlarmListParams.label = alarm_marked_title.getString(options1);
+                getAlarmList();
             }
         })
                 .setSubCalSize(15)//确定和取消文字大小
@@ -339,17 +402,22 @@ public class AlarmFragment extends BaseFragment {
         for (int i = 0; i < alarm_marked_title.length(); i++) {
             list.add(alarm_marked_title.getString(i));
         }
-
         mOptionsPickerView.setPicker(list);//添加数据源
         mOptionsPickerView.show();
-
     }
 
     private void showDevicePv(final TextView view) {
         OptionsPickerView mOptionsPickerView = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-
+                if (options1 == 0) {
+                    mAlarmListParams.deviceId = null;
+                    view.setText(R.string.all_device);
+                } else{
+                    mAlarmListParams.deviceId = mDeviceList.get(options1 - 1).id;
+                    view.setText(mDeviceList.get(options1-1).id);
+                }
+                getAlarmList();
             }
         })
                 .setSubCalSize(15)//确定和取消文字大小
@@ -361,12 +429,11 @@ public class AlarmFragment extends BaseFragment {
                 .setCyclic(false, false, false)//循环与否
                 .build();
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < alarm_device_title.length(); i++) {
-            list.add(alarm_device_title.getString(i));
+        list.add(getContext().getResources().getString(R.string.all_device));
+        for (int i = 0; i < mDeviceList.size(); i++) {
+            list.add(mDeviceList.get(i).id);
         }
-
         mOptionsPickerView.setPicker(list);//添加数据源
         mOptionsPickerView.show();
-
     }
 }

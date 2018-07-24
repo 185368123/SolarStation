@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/BaseToolbarStyle"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp"
+                app:navigationIcon="@mipmap/ic_back">
+
+                <TextView
+                    android:id="@+id/tv_add_device_title"
+                    style="@style/BaseToolbarTitleStyle"
+                    android:drawablePadding="5dp"
+                    android:text="@string/default_text" />
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_add_device_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layoutManager="LinearLayoutManager" />
+
+            <Button
+                android:background="@drawable/bg_rounded_rectangle_blue"
+                style="@style/MiddleWhiteTextSizeStyle"
+                android:text="@string/add_now"
+                android:id="@+id/btn_add_device_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

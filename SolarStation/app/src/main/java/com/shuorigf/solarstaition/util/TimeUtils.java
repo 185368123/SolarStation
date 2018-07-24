@@ -290,7 +290,7 @@ public class TimeUtils {
     }
 
     /**
-     * 将Date类型转为时间字符串
+     * 将Date类型转为时间字符串 取出年份
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>
      *
      * @param date Date类型时间
@@ -301,7 +301,7 @@ public class TimeUtils {
     }
 
     /**
-     * 将Date类型转为时间字符串
+     * 将Date类型转为时间字符串 取出年月
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>
      *
      * @param date Date类型时间
@@ -313,7 +313,7 @@ public class TimeUtils {
     }
 
     /**
-     * 将Date类型转为时间字符串
+     * 将Date类型转为时间字符串 取出年月日
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>
      *
      * @param date Date类型时间

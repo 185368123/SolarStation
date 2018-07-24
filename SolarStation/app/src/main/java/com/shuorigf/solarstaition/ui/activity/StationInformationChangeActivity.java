@@ -118,6 +118,7 @@ public class StationInformationChangeActivity extends BaseActivity {
                     @Override
                     public void onNext(SaveInfo s) {
                         ToastUtil.showShortToast(StationInformationChangeActivity.this, R.string.save_success);
+                        mRxManager.post(Constants.INIT_STATION_DETAIL,null);
                         finish();
                     }
 

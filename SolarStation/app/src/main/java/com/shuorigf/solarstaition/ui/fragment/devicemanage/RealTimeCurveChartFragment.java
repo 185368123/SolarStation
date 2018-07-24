@@ -8,6 +8,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.google.gson.Gson;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.base.BaseFragment;
 import com.shuorigf.solarstaition.constants.Constants;
@@ -20,6 +21,7 @@ import com.shuorigf.solarstaition.data.response.device.DeviceDataLogChartInfo;
 import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.ui.view.MyXFormatter;
 import com.shuorigf.solarstaition.util.DisposableManager;
+import com.shuorigf.solarstaition.util.JsonUntils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
@@ -31,6 +33,7 @@ import java.util.Map;
 import butterknife.BindView;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/12.
@@ -39,7 +42,6 @@ import io.reactivex.subscribers.DisposableSubscriber;
 public class RealTimeCurveChartFragment extends BaseFragment {
 
 
-    private static final String[] Y_VALUE = {"00", "02", "04", "06", "08", "10", "12", "14", "16", "18"};
     @BindView(R.id.tv_real_time_curve_top_title)
     TextView mTopTitleTv;
     @BindView(R.id.line_chart_top)
@@ -93,8 +95,8 @@ public class RealTimeCurveChartFragment extends BaseFragment {
     public void init(Bundle savedInstanceState) {
         mDeviceService = RetrofitUtil.create(DeviceService.class);
         mDeviceDataLogChartParams1.id = getActivity().getIntent().getStringExtra(Constants.DEVICE_ID);
-        mDeviceDataLogChartParams1.dateType = DeviceDataLogChartParams.DATE_TYPE_ALL;
         mDeviceDataLogChartParams2.id = getActivity().getIntent().getStringExtra(Constants.DEVICE_ID);
+        mDeviceDataLogChartParams1.dateType = DeviceDataLogChartParams.DATE_TYPE_ALL;
         mDeviceDataLogChartParams2.dateType = DeviceDataLogChartParams.DATE_TYPE_ALL;
         int type = getArguments().getInt(Constants.REAL_TIME_CURVE_CHART_TYPE);
 
@@ -152,8 +154,6 @@ public class RealTimeCurveChartFragment extends BaseFragment {
         xAxis.setDrawAxisLine(true);
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelCount(Y_VALUE.length);
-        xAxis.setValueFormatter(new MyXFormatter(Y_VALUE));
 
 
         YAxis leftAxis = lineChart.getAxisLeft();
@@ -171,13 +171,17 @@ public class RealTimeCurveChartFragment extends BaseFragment {
 
     }
 
-    private void initLineChartXY(LineChart lineChart,String max,String min,String avg){
-        YAxis leftAxis=lineChart.getAxisLeft();
-        String []y=getY_VALUE(Double.parseDouble(max),Double.parseDouble(min),Double.parseDouble(avg));
-        leftAxis.setAxisMinimum(Float.parseFloat(min)-1);
-        leftAxis.setAxisMaximum(Float.parseFloat(max)+1);
-        //leftAxis.setLabelCount(y.length);
-        //leftAxis.setValueFormatter(new MyXFormatter(y));
+    private void initLineChartXY(LineChart lineChart, DeviceDataLogChartInfo deviceDataLogChartInfo) {
+        String[] X_VALUE = JsonUntils.getKey(new Gson().toJson(deviceDataLogChartInfo.logInfo));
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.setAxisMinimum(Float.parseFloat(deviceDataLogChartInfo.min) - 1);
+        leftAxis.setAxisMaximum(Float.parseFloat(deviceDataLogChartInfo.max) + 1);
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setLabelCount(X_VALUE.length);
+        xAxis.setValueFormatter(new MyXFormatter(X_VALUE));
+
+
     }
 
     /**
@@ -198,7 +202,6 @@ public class RealTimeCurveChartFragment extends BaseFragment {
         map.put(DeviceDataLogChartParams.ID, mDeviceDataLogChartParams1.id);
         map.put(DeviceDataLogChartParams.TYPE, mDeviceDataLogChartParams1.type);
         map.put(DeviceDataLogChartParams.DATE_TYPE, mDeviceDataLogChartParams1.dateType);
-        map.put(DeviceDataLogChartParams.DATE, mDeviceDataLogChartParams1.dateType);
         if (mDeviceDataLogChartParams1.date != null) {
             map.put(DeviceDataLogChartParams.DATE, mDeviceDataLogChartParams1.date);
         }
@@ -211,7 +214,7 @@ public class RealTimeCurveChartFragment extends BaseFragment {
                         mTopMaxTv.setText(String.format(getString(R.string.format_maximum_value), deviceDataLogChartInfo.max));
                         mTopMinTv.setText(String.format(getString(R.string.format_minimum_value), deviceDataLogChartInfo.min));
                         mTopAvgTv.setText(String.format(getString(R.string.format_average_value), deviceDataLogChartInfo.avg));
-                        initLineChartXY(mTopLineChart,deviceDataLogChartInfo.max,deviceDataLogChartInfo.min,deviceDataLogChartInfo.avg);
+                        initLineChartXY(mTopLineChart, deviceDataLogChartInfo);
                         initLineChartData1(deviceDataLogChartInfo.logInfo);
                     }
 
@@ -233,22 +236,13 @@ public class RealTimeCurveChartFragment extends BaseFragment {
 
     }
 
-    private void initLineChartData1(DeviceDataLogChartInfo.LogInfo logInfo) {
+    private void initLineChartData1(Object logInfo) {
         if (logInfo == null) {
             return;
         }
         LineChartData lineChartData = new LineChartData();
-        List<Float> list = new ArrayList<>();
-        list.add(logInfo.zero);
-        list.add(logInfo.two);
-        list.add(logInfo.four);
-        list.add(logInfo.six);
-        list.add(logInfo.eight);
-        list.add(logInfo.ten);
-        list.add(logInfo.twelve);
-        list.add(logInfo.fourteen);
-        list.add(logInfo.sixteen);
-        list.add(logInfo.eighteen);
+        List<Float> list = JsonUntils.getValue(new Gson().toJson(logInfo));
+
         lineChartData.addLine(list, ContextCompat.getColor(getContext(), R.color.textBlue), true, false);
         lineChartData.drawLine(mTopLineChart);
     }
@@ -275,7 +269,7 @@ public class RealTimeCurveChartFragment extends BaseFragment {
                         mBottomMaxTv.setText(String.format(getString(R.string.format_maximum_value), deviceDataLogChartInfo.max));
                         mBottomMinTv.setText(String.format(getString(R.string.format_minimum_value), deviceDataLogChartInfo.min));
                         mBottomAvgTv.setText(String.format(getString(R.string.format_average_value), deviceDataLogChartInfo.avg));
-                        initLineChartXY(mBottomLineChart,deviceDataLogChartInfo.max,deviceDataLogChartInfo.min,deviceDataLogChartInfo.avg);
+                        initLineChartXY(mBottomLineChart, deviceDataLogChartInfo);
                         initLineChartData2(deviceDataLogChartInfo.logInfo);
                     }
 
@@ -297,22 +291,12 @@ public class RealTimeCurveChartFragment extends BaseFragment {
 
     }
 
-    private void initLineChartData2(DeviceDataLogChartInfo.LogInfo logInfo) {
+    private void initLineChartData2(Object logInfo) {
         if (logInfo == null) {
             return;
         }
         LineChartData lineChartData = new LineChartData();
-        List<Float> list = new ArrayList<>();
-        list.add(logInfo.zero);
-        list.add(logInfo.two);
-        list.add(logInfo.four);
-        list.add(logInfo.six);
-        list.add(logInfo.eight);
-        list.add(logInfo.ten);
-        list.add(logInfo.twelve);
-        list.add(logInfo.fourteen);
-        list.add(logInfo.sixteen);
-        list.add(logInfo.eighteen);
+        List<Float> list = JsonUntils.getValue(new Gson().toJson(logInfo));
         lineChartData.addLine(list, ContextCompat.getColor(getContext(), R.color.textBlue), true, false);
         lineChartData.drawLine(mBottomLineChart);
     }
@@ -322,21 +306,17 @@ public class RealTimeCurveChartFragment extends BaseFragment {
      */
     @Override
     protected void initEvent() {
-
+        mRxManager.on(Constants.REAL_TIME_CURVE_DATA, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                mDeviceDataLogChartParams1.dateType = SingleBeans.getInstance().getDate_type();
+                mDeviceDataLogChartParams2.dateType = SingleBeans.getInstance().getDate_type();
+                mDeviceDataLogChartParams1.date=SingleBeans.getInstance().getDate();
+                mDeviceDataLogChartParams2.date=SingleBeans.getInstance().getDate();
+                getDataLogChart1();
+                getDataLogChart2();
+            }
+        });
     }
 
-
-    public String[] getY_VALUE(double max,double min,double avg){//根据最大、最小、平均值计算出Y轴的九个坐标点
-        List<String> list=new ArrayList<>();
-        double distance_max=Math.ceil(Math.max(max-avg,avg-min));
-        while (distance_max%4!=0){
-            distance_max++;
-        }
-        if (distance_max<4)
-            distance_max=4;
-        for (int i = 0; i < 9; i++) {
-            list.add(Math.ceil(avg)+(distance_max/4)*(4-i)+"");
-        }
-        return  (String[])list.toArray(new String[list.size()]);
-    }
 }

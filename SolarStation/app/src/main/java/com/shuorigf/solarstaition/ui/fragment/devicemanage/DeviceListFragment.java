@@ -24,6 +24,7 @@ import com.shuorigf.solarstaition.ui.activity.EditingDeviceActivity;
 import com.shuorigf.solarstaition.ui.fragment.MessageDialogFragment;
 import com.shuorigf.solarstaition.util.ConvertUtils;
 import com.shuorigf.solarstaition.util.DisposableManager;
+import com.shuorigf.solarstaition.util.LogUtils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
@@ -32,6 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/15.
@@ -143,12 +145,14 @@ public class DeviceListFragment extends BaseFragment {
                                 .setOnNegativeClickListener(new MessageDialogFragment.OnNegativeClickListener() {
                                     @Override
                                     public void onNegativeClick(MessageDialogFragment fragment, View cancel) {
+                                        LogUtils.logd("取消删除");
                                         fragment.dismiss();
                                     }
                                 })
                                 .setOnPositiveClickListener(new MessageDialogFragment.OnPositiveClickListener() {
                                     @Override
                                     public void onPositiveClick(MessageDialogFragment fragment, View ok) {
+                                        LogUtils.logd("确定删除");
                                         delDevice(deviceListInfo.id);
                                         fragment.dismiss();
                                     }
@@ -173,7 +177,7 @@ public class DeviceListFragment extends BaseFragment {
                     @Override
                     public void onNext(Void s) {
                         ToastUtil.showShortToast(getContext(), R.string.delete_success);
-                        getDeviceList();
+                        mRxManager.post(Constants.REFSH_DEVICE_DATA,null);
                     }
 
                     @Override
@@ -201,6 +205,13 @@ public class DeviceListFragment extends BaseFragment {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                getDeviceList();
+            }
+        });
+
+        mRxManager.on(Constants.REFSH_DEVICE_DATA, new Action1<Object>() {
+            @Override
+            public void call(Object o) {
                 getDeviceList();
             }
         });

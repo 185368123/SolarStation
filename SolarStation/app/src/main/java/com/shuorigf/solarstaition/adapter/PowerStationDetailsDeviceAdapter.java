@@ -18,9 +18,10 @@ import java.util.List;
  */
 
 public class PowerStationDetailsDeviceAdapter extends BaseQuickAdapter<DeviceListInfo, BaseViewHolder> {
-
-    public PowerStationDetailsDeviceAdapter(List<DeviceListInfo> data) {
+String mStationId;
+    public PowerStationDetailsDeviceAdapter(List<DeviceListInfo> data,String mStationId) {
         super(R.layout.rv_item_power_station_details_device, data);
+        this.mStationId=mStationId;
     }
     @Override
     protected void convert(BaseViewHolder baseViewHolder, final DeviceListInfo deviceListInfo) {
@@ -42,6 +43,7 @@ public class PowerStationDetailsDeviceAdapter extends BaseQuickAdapter<DeviceLis
                 Intent intent = new Intent(view.getContext(), DeviceManageActivity.class);
                 intent.putExtra(Constants.DEVICE_NAME, deviceListInfo.type);
                 intent.putExtra(Constants.DEVICE_ID, deviceListInfo.id);
+                intent.putExtra(Constants.STATION_ID, mStationId);
                 view.getContext().startActivity(intent);
             }
         });

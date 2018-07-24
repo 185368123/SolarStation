@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.util.ConvertUtils;
+import com.shuorigf.solarstaition.util.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,11 +91,15 @@ public class MessageDialogFragment extends DialogFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_confirm:
+                LogUtils.logd("btn_confirm");
                 if (onPositiveClickListener != null) {
+                    LogUtils.logd("btn_confirm______");
                     onPositiveClickListener.onPositiveClick(this, view);
-                }
+                }else
+                    LogUtils.logd("onPositiveClickListener为空");
                 break;
             case R.id.btn_cancel:
+                LogUtils.logd("btn_cancel");
                 if (onNegativeClickListener != null) {
                     onNegativeClickListener.onNegativeClick(this, view);
                 }
@@ -150,6 +155,10 @@ public class MessageDialogFragment extends DialogFragment {
     }
 
     public MessageDialogFragment setOnPositiveClickListener(OnPositiveClickListener onPositiveClickListener) {
+        if (onPositiveClickListener==null){
+            LogUtils.logd("onPositiveClickListener设置为空");
+        }else
+            LogUtils.logd("onPositiveClickListener设置不为空");
         this.onPositiveClickListener = onPositiveClickListener;
         return this;
     }

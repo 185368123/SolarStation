@@ -22,10 +22,10 @@ public class StationPowerLogInfo {
     @SerializedName("avg")
     public String avg;
     @SerializedName("log")
-    public LogInfo logInfo;
+    public Object logInfo;
 
-    public static class LogInfo {
-        /**
+   /* public static class LogInfo {
+        *//**
          * 00:00 : 0
          * 02:00 : 20
          * 04:00 : 60
@@ -36,7 +36,7 @@ public class StationPowerLogInfo {
          * 14:00 : 40
          * 16:00 : 80
          * 18:00 : 20
-         */
+         *//*
 
         @SerializedName("00:00")
         public float zero;
@@ -58,5 +58,5 @@ public class StationPowerLogInfo {
         public float sixteen;
         @SerializedName("18:00")
         public float eighteen;
-    }
+    }*/
 }

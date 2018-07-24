@@ -17,6 +17,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.adapter.CommonFragmentPagerAdapter;
 import com.shuorigf.solarstaition.base.BaseFragment;
+import com.shuorigf.solarstaition.constants.Constants;
 import com.shuorigf.solarstaition.data.SingleBeans;
 import com.shuorigf.solarstaition.util.TimeUtils;
 
@@ -59,6 +60,8 @@ public class RealTimeCurveFragment extends BaseFragment {
         Bundle args = new Bundle();
         RealTimeCurveFragment fragment = new RealTimeCurveFragment();
         fragment.setArguments(args);
+        SingleBeans.getInstance().setDate_type("0");
+        SingleBeans.getInstance().setDate(null);
         return fragment;
     }
 
@@ -122,6 +125,8 @@ public class RealTimeCurveFragment extends BaseFragment {
                         setYearMonthShow(false, false);
                         tvDateRealTime.setVisibility(View.GONE);
                         SingleBeans.getInstance().setDate_type("0");
+                        SingleBeans.getInstance().setDate(null);
+                        mRxManager.post(Constants.REAL_TIME_CURVE_DATA,null);
                         break;
                     case R.id.rb_real_time_2:
                         setYearMonthShow(true, false);
@@ -163,12 +168,15 @@ public class RealTimeCurveFragment extends BaseFragment {
                 if (yearShow && monthShow) {
                     SingleBeans.getInstance().setDate(TimeUtils.date2StringYM(date));
                     tvDateRealTime.setText(TimeUtils.date2StringYM(date));
+                    mRxManager.post(Constants.REAL_TIME_CURVE_DATA,null);
                 } else if (yearShow) {
                     SingleBeans.getInstance().setDate(TimeUtils.date2StringY(date));
                     tvDateRealTime.setText(TimeUtils.date2StringY(date));
+                    mRxManager.post(Constants.REAL_TIME_CURVE_DATA,null);
                 } else {
                     SingleBeans.getInstance().setDate("");
                     tvDateRealTime.setText(R.string.all);
+
                 }
             }
         })

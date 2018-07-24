@@ -9,6 +9,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.google.gson.Gson;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.base.BaseFragment;
 import com.shuorigf.solarstaition.constants.Constants;
@@ -20,10 +21,10 @@ import com.shuorigf.solarstaition.data.response.station.StationPowerLogInfo;
 import com.shuorigf.solarstaition.data.service.StationService;
 import com.shuorigf.solarstaition.ui.view.MyXFormatter;
 import com.shuorigf.solarstaition.util.DisposableManager;
+import com.shuorigf.solarstaition.util.JsonUntils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,15 +81,15 @@ public class PowerChartFragment extends BaseFragment {
         mPowerTv.setText(type);
         if (type == R.string.charging_power) {
             mType = StationPowerLogParams.TYPE_CHARGE;
-        }else {
+        } else {
             mType = StationPowerLogParams.TYPE_DISCHARGE;
         }
-        initLineChart();
     }
 
 
+    private void initLineChart(StationPowerLogInfo o) {
 
-    private void initLineChart() {
+        String[] X_VALUE = JsonUntils.getKey(new Gson().toJson(o.logInfo));
         // enable touch gestures
         mLineChart.setTouchEnabled(false);
 
@@ -112,8 +113,8 @@ public class PowerChartFragment extends BaseFragment {
         xAxis.setDrawAxisLine(true);
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelCount(Y_VALUE.length);
-        xAxis.setValueFormatter(new MyXFormatter(Y_VALUE));
+        xAxis.setLabelCount(X_VALUE.length);
+        xAxis.setValueFormatter(new MyXFormatter(X_VALUE));
 
 
         YAxis leftAxis = mLineChart.getAxisLeft();
@@ -121,6 +122,9 @@ public class PowerChartFragment extends BaseFragment {
         leftAxis.setDrawGridLines(true);
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawAxisLine(true);
+        leftAxis.setAxisMaximum(Float.parseFloat(o.max));
+        leftAxis.setAxisMinimum(Float.parseFloat(o.min));
+
 
         // limit lines are drawn behind data (and not on top)
         leftAxis.setDrawLimitLinesBehindData(true);
@@ -136,7 +140,7 @@ public class PowerChartFragment extends BaseFragment {
      */
     @Override
     public void initData() {
-       super.initData();
+        super.initData();
         getPowerLog();
     }
 
@@ -145,14 +149,15 @@ public class PowerChartFragment extends BaseFragment {
             return;
         }
         Map<String, String> map = new HashMap<>();
-        map.put(StationPowerLogParams.STATION_ID,mStationId);
-        map.put(StationPowerLogParams.TYPE,mType);
+        map.put(StationPowerLogParams.STATION_ID, mStationId);
+        map.put(StationPowerLogParams.TYPE, mType);
         Disposable disposable = mStationService.getPowerLog(map)
                 .compose(new HttpResultTransformer<StationPowerLogInfo>())
                 .subscribeWith(new DisposableSubscriber<StationPowerLogInfo>() {
                     @Override
                     public void onNext(StationPowerLogInfo stationPowerLogInfo) {
-                        initLineChartData(stationPowerLogInfo.logInfo);
+                        initLineChartData(new Gson().toJson(stationPowerLogInfo.logInfo));
+                        initLineChart(stationPowerLogInfo);
                     }
 
                     @Override
@@ -173,24 +178,13 @@ public class PowerChartFragment extends BaseFragment {
 
     }
 
-    private void initLineChartData(StationPowerLogInfo.LogInfo logInfo) {
-        if(logInfo == null) {
+    private void initLineChartData(String logInfo) {
+        if (logInfo == null) {
             return;
         }
 
         LineChartData lineChartData = new LineChartData();
-
-        List<Float> list = new ArrayList<>();
-        list.add(logInfo.zero);
-        list.add(logInfo.two);
-        list.add(logInfo.four);
-        list.add(logInfo.six);
-        list.add(logInfo.eight);
-        list.add(logInfo.ten);
-        list.add(logInfo.twelve);
-        list.add(logInfo.fourteen);
-        list.add(logInfo.sixteen);
-        list.add(logInfo.eighteen);
+        List<Float> list = JsonUntils.getValue(logInfo);
         lineChartData.addLine(list, ContextCompat.getColor(getContext(), R.color.textBlue), true, false);
         lineChartData.drawLine(mLineChart);
     }

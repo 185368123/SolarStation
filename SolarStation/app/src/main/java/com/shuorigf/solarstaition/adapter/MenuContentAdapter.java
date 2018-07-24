@@ -23,6 +23,7 @@ public class MenuContentAdapter extends BaseQuickAdapter<Integer, BaseViewHolder
     protected void convert(BaseViewHolder baseViewHolder, Integer integer) {
         baseViewHolder.setText(R.id.tv_title, integer);
         TextView content = baseViewHolder.getView(R.id.tv_content);
+        content.setSelected(true);
         content.setTextColor(ContextCompat.getColor(mContext, R.color.textGray));
         switch (integer) {
             case R.string.company:

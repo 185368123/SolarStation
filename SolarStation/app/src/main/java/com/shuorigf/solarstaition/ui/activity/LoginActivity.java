@@ -45,7 +45,6 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.edt_login_password)
     EditText mPasswordEdt;
 
-
     private UserService mUserService;
 
     @Override
