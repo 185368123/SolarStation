@@ -21,6 +21,7 @@ import com.shuorigf.solarstaition.data.params.BaseParams;
 import com.shuorigf.solarstaition.data.params.login.LoginParams;
 import com.shuorigf.solarstaition.data.response.login.UserInfo;
 import com.shuorigf.solarstaition.data.service.UserService;
+import com.shuorigf.solarstaition.provider.UserInfoProvider;
 import com.shuorigf.solarstaition.ui.fragment.MessageDialogFragment;
 import com.shuorigf.solarstaition.util.DisposableManager;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
@@ -55,6 +56,10 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void init(Bundle savedInstanceState) {
         mUserService = RetrofitUtil.create(UserService.class);
+        if (UserInfoProvider.getAccount()!=null&&UserInfoProvider.getPassWord()!=null){
+            mAccountEdt.setText(UserInfoProvider.getAccount());
+            mPasswordEdt.setText(UserInfoProvider.getPassWord());
+        }
     }
 
 
@@ -65,7 +70,7 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         final String accountStr = mAccountEdt.getText().toString().trim();
-        String passwordStr = mPasswordEdt.getText().toString().trim();
+        final String passwordStr = mPasswordEdt.getText().toString().trim();
         if (TextUtils.isEmpty(accountStr)) {
             ToastUtil.showShortToast(this, R.string.hint_input_account);
             return;
@@ -90,6 +95,8 @@ public class LoginActivity extends BaseActivity {
                 .subscribeWith(new DisposableSubscriber<UserInfo>() {
                     @Override
                     public void onNext(UserInfo userInfo) {
+                        UserInfoProvider.setAccount(accountStr);
+                        UserInfoProvider.setPassWord(passwordStr);
                         BaseParams.mUserName = accountStr;
                         BaseParams.mClientKey = imeiStr;
                         BaseParams.mToken = userInfo.token;

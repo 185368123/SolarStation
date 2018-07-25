@@ -45,6 +45,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 
 public class MyApplication extends Application {
+
+    public static MyApplication baseApplication;
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -148,6 +150,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        baseApplication = this;
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
         PersistentCookieStore store = new PersistentCookieStore(getApplicationContext());
         CookieHandler cookieHandler = new CookieManager(store, CookiePolicy.ACCEPT_ALL);
@@ -186,6 +189,10 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(base);
+    }
+
+    public static Context getAppApplication() {
+        return baseApplication;
     }
 
 }
