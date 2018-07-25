@@ -32,13 +32,13 @@ public class HomeDataInfo {
     public String stationCount;
     @SerializedName("fault_count")
     public String faultCount;
-    @SerializedName("electric_saving")
+    @SerializedName("electric_reduction")
     public String electricSaving;
-    @SerializedName("coal_saving")
+    @SerializedName("coal_reduction")
     public String coalSaving;
-    @SerializedName("co2_emission")
+    @SerializedName("co2_reduction")
     public String co2Emission;
-    @SerializedName("so2_emission")
+    @SerializedName("so2_reduction")
     public String so2Emission;
     @SerializedName("day_generating")
     public String dayGenerating;

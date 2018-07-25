@@ -30,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/12.
@@ -141,6 +142,7 @@ public class RealTimeCurveFragment extends BaseFragment {
                 }
             }
         });
+
     }
 
     private void setYearMonthShow(boolean yearShow, boolean monthShow) {

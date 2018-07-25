@@ -29,6 +29,7 @@ import butterknife.BindArray;
 import butterknife.BindView;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/10/15.
@@ -144,6 +145,14 @@ public class RealTimeMonitoringFragment extends BaseFragment {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 getRealTimeData();
+            }
+        });
+
+        mRxManager.on(Constants.REFSH_ALL_DEVICE_DATA, new Action1<String>() {
+            @Override
+            public void call(String o) {
+                mDeviceId=o;
+                initData();
             }
         });
     }

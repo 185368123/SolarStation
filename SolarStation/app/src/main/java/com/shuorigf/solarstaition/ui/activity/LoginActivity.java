@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -47,7 +48,7 @@ public class LoginActivity extends BaseActivity {
     EditText mPasswordEdt;
 
     private UserService mUserService;
-
+public static int MY_PERMISSIONS_REQUEST_READ_CONTACTS=15894;
     @Override
     public int getLayoutRes() {
         return R.layout.activity_login;
@@ -59,6 +60,13 @@ public class LoginActivity extends BaseActivity {
         if (UserInfoProvider.getAccount()!=null&&UserInfoProvider.getPassWord()!=null){
             mAccountEdt.setText(UserInfoProvider.getAccount());
             mPasswordEdt.setText(UserInfoProvider.getPassWord());
+        }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
     }
 

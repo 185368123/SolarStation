@@ -1,8 +1,11 @@
 package com.shuorigf.solarstaition.ui.fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -55,6 +58,7 @@ public class MapFragment extends BaseFragment {
     private StationService mStationService;
 
     private MapPowerStationAdapter mMapPowerStationAdapter;
+    public static int MY_PERMISSIONS_REQUEST = 55555;
 
     public static MapFragment newInstance() {
 
@@ -91,6 +95,15 @@ public class MapFragment extends BaseFragment {
             aMap = mapView.getMap();
         }
 
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST);
+        }else {
+            initMyLocationStyle();
+        }
     }
 
     /**
@@ -200,7 +213,6 @@ public class MapFragment extends BaseFragment {
     }
 
 
-
     @OnClick({R.id.tv_map_search, R.id.iv_map_location})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -221,7 +233,6 @@ public class MapFragment extends BaseFragment {
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
         aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         aMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-        //aMap.getUiSettings().setMyLocationButtonEnabled(true);设置默认定位按钮是否显示，非必需设置。
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
     }
 
@@ -245,7 +256,7 @@ public class MapFragment extends BaseFragment {
                 if (i == position) {
                     title.setTextColor(ContextCompat.getColor(getContext(), R.color.textWhite));
                     title.setBackgroundResource(R.drawable.bg_rounded_rectangle_blue);
-                }else {
+                } else {
                     title.setTextColor(ContextCompat.getColor(getContext(), R.color.textBlack));
                     title.setBackgroundResource(R.drawable.bg_rounded_rectangle_white);
                 }

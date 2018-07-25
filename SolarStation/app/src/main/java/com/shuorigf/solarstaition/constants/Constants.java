@@ -43,5 +43,6 @@ public class Constants {
     public static final String INIT_STATION_DETAIL = "initStationDetail";
     public static final String REAL_TIME_CURVE_DATA = "initRealTimeData";
     public static final String REFSH_DEVICE_DATA = "refsh_device_data";
+    public static final String REFSH_ALL_DEVICE_DATA = "refsh_all_device_data";
 
 }

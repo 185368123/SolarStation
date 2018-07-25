@@ -317,6 +317,15 @@ public class RealTimeCurveChartFragment extends BaseFragment {
                 getDataLogChart2();
             }
         });
+
+        mRxManager.on(Constants.REFSH_ALL_DEVICE_DATA, new Action1<String>() {
+            @Override
+            public void call(String o) {
+                mDeviceDataLogChartParams1.dateType = o;
+                mDeviceDataLogChartParams2.dateType = o;
+                initData();
+            }
+        });
     }
 
 }
