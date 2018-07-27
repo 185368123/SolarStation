@@ -42,7 +42,6 @@ public class HttpResultFlatMapFunction<T> implements Function<HttpResult<T>, Pub
                         }
                         return observer;
                     }
-
                 });
     }
 

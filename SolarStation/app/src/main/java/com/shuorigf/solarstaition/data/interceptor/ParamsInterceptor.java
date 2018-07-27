@@ -68,7 +68,6 @@ public class ParamsInterceptor implements Interceptor {
             if (BaseParams.mOs != null) {
                 newFormBody.add(BaseParams.OS, BaseParams.mOs);
             }
-
             body = newFormBody.build();
         }
         if (request.method().equals("POST")){

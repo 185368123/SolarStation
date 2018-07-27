@@ -85,7 +85,9 @@ public class DeviceManageActivity extends BaseActivity {
     public void init(Bundle savedInstanceState) {
         mTitleTv.setText(getIntent().getStringExtra(Constants.DEVICE_NAME));
         mDeviceService = RetrofitUtil.create(DeviceService.class);
-        mStationId = getIntent().getStringExtra(Constants.STATION_ID);
+        mStationId = getStationId();
+        mDeviceListInfo=new DeviceListInfo();
+        mDeviceListInfo.id=getIntent().getStringExtra(Constants.DEVICE_ID);
         getDeviceList();
         initVP();
     }

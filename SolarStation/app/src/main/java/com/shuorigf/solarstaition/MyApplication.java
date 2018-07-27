@@ -71,31 +71,8 @@ public class MyApplication extends Application {
 
     private ActivityLifecycleCallbacks lifecycleCallbacks = new ActivityLifecycleCallbacks() {
 
-        //需要更新到26SDK才有这个类。暂时无视
-        /*private android.app.FragmentManager.FragmentLifecycleCallbacks lifecycleCallbacks =
-                new android.app.FragmentManager.FragmentLifecycleCallbacks() {
-
-                    @Override
-                    public void onFragmentResumed(android.app.FragmentManager fm, android.app.Fragment f) {
-                        super.onFragmentResumed(fm, f);
-                    }
-
-                    @Override
-                    public void onFragmentPaused(android.app.FragmentManager fm, android.app.Fragment f) {
-                        super.onFragmentPaused(fm, f);
-                    }
-
-                    @Override
-                    public void onFragmentDetached(android.app.FragmentManager fm, android.app.Fragment f) {
-                        super.onFragmentDetached(fm, f);
-                        DisposableManager.getInstance().clear(f);
-                    }
-
-                };*/
-
         private FragmentManager.FragmentLifecycleCallbacks supportLifecycleCallbacks =
                 new FragmentManager.FragmentLifecycleCallbacks() {
-
                     @Override
                     public void onFragmentDetached(FragmentManager fm, Fragment f) {
                         super.onFragmentDetached(fm, f);
@@ -154,7 +131,6 @@ public class MyApplication extends Application {
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
         PersistentCookieStore store = new PersistentCookieStore(getApplicationContext());
         CookieHandler cookieHandler = new CookieManager(store, CookiePolicy.ACCEPT_ALL);
-
         //设置缓存
         File httpCacheDirectory = new File(getCacheDir(), "cache_responses_pg");
         Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
@@ -174,6 +150,7 @@ public class MyApplication extends Application {
                     Log.i("OkHttp", message);
                 }
             }).setLevel(HttpLoggingInterceptor.Level.BODY));
+
         }
         RetrofitUtil.initClient(builder.build());
         RetrofitUtil.BASE_URL = ApiConstants.getBaseApiUrl();

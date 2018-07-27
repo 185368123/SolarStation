@@ -16,6 +16,7 @@ import com.shuorigf.solarstaition.adapter.HomepageSaveAdapter;
 import com.shuorigf.solarstaition.base.BaseFragment;
 import com.shuorigf.solarstaition.data.IconText;
 import com.shuorigf.solarstaition.data.exception.ResponseMessageException;
+import com.shuorigf.solarstaition.data.flowable.HttpResultFlatMapFunction;
 import com.shuorigf.solarstaition.data.flowable.HttpResultTransformer;
 import com.shuorigf.solarstaition.data.response.home.HomeDataInfo;
 import com.shuorigf.solarstaition.data.service.HomeService;
@@ -32,7 +33,9 @@ import java.util.List;
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
@@ -128,7 +131,9 @@ public class HomePageFragment extends BaseFragment {
 
     private void getHomeData() {
         Disposable disposable = mHomeService.getHomeData()
-                .compose(new HttpResultTransformer<HomeDataInfo>())
+                .subscribeOn(Schedulers.io())
+                .flatMap(new HttpResultFlatMapFunction<HomeDataInfo>())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSubscriber<HomeDataInfo>() {
                     @Override
                     public void onNext(HomeDataInfo homeDataInfo) {
