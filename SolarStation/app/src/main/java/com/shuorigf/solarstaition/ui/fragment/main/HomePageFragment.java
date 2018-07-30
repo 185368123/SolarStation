@@ -131,9 +131,7 @@ public class HomePageFragment extends BaseFragment {
 
     private void getHomeData() {
         Disposable disposable = mHomeService.getHomeData()
-                .subscribeOn(Schedulers.io())
-                .flatMap(new HttpResultFlatMapFunction<HomeDataInfo>())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpResultTransformer<HomeDataInfo>())
                 .subscribeWith(new DisposableSubscriber<HomeDataInfo>() {
                     @Override
                     public void onNext(HomeDataInfo homeDataInfo) {

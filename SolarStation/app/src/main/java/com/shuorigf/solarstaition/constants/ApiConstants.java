@@ -19,8 +19,7 @@ public class ApiConstants {
 
     public final static String DEFAULT_WEB_ROOT = "http://station-iot.com/";// 默认网点
     public final static String API_VERSION = "api/";
-
-
+    public final static String IMAGE_URL = "http://station-iot.com";// 图片网址前缀
     public static UserInfo mUserInfo;
 
     //user

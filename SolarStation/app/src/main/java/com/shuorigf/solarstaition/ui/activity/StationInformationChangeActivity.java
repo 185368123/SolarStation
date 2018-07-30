@@ -71,6 +71,7 @@ public class StationInformationChangeActivity extends BaseActivity {
     @OnClick(R.id.btn_save_station_information)
     public void onViewClicked() {
         Map<String, String> map = new HashMap<>();
+        stationSaveParams.photo=stationSaveParams.photo.replace("http://station-iot.com","");
         map.put(StationSaveParams.ID, stationSaveParams.id);
         map.put(StationSaveParams.NAME, stationSaveParams.name);
         map.put(StationSaveParams.PROJECT_ID, stationSaveParams.projectId);

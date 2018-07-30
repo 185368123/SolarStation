@@ -24,7 +24,6 @@ public class ParamsInterceptor implements Interceptor {
 
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
-
         RequestBody body = null;
 
         if (request.body() instanceof MultipartBody){

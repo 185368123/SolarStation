@@ -39,7 +39,7 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.designer);
                 break;
             case R.string.total_power_of_battery_board:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelPower);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelPower+" Mwh");
                 break;
             case R.string.type_of_battery_board:
                 switch (stationDetailInfo.panelType) {
@@ -64,16 +64,16 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelParallelCount);
                 break;
             case R.string.power_of_single_battery_board:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSinglePower);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSinglePower+" W");
                 break;
             case R.string.total_quantity_of_battery_board:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelCount);
                 break;
             case R.string.total_open_circuit_voltage_of_battery_board:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelVoltage);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelVoltage+" V");
                 break;
             case R.string.total_working_current_of_battery_board:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelCurrent);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelCurrent+" A");
                 break;
             case R.string.single_battery_board_vmp:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleVmp);

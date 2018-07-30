@@ -11,13 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.data.SingleBeans;
 import com.shuorigf.solarstaition.data.params.station.StationSaveParams;
+import com.shuorigf.solarstaition.util.TimeUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindArray;
@@ -55,6 +59,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
         final TextView select = baseViewHolder.getView(R.id.tv_select);
         EditText content = baseViewHolder.getView(R.id.edt_content);
         switch (integer) {
+            case R.string.install_date:
             case R.string.belong_to_project:
             case R.string.type_of_battery_board:
             case R.string.type_of_storage_battery:
@@ -68,6 +73,9 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             @Override
             public void onClick(View view) {
                 switch (integer) {
+                    case R.string.install_date:
+                        showTimePv(select);
+                        break;
                     case R.string.belong_to_project:
                         showProjectTypePv(select);
                         break;
@@ -192,7 +200,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 view.setText(SingleBeans.getInstance().getProjectListInfos().get(options1).projectName);
-                SingleBeans.getInstance().getSaveParams().projectId=SingleBeans.getInstance().getProjectListInfos().get(options1).projectId;
+                mStationSaveParams.projectId=SingleBeans.getInstance().getProjectListInfos().get(options1).projectId;
             }
         })
                 .setSubCalSize(15)//确定和取消文字大小
@@ -284,5 +292,29 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
         mOptionsPickerView.setPicker(list);//添加数据源
         mOptionsPickerView.show();
 
+    }
+
+    private void showTimePv(final TextView view) {
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(2018, 0, 1);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2020, 11, 31);
+        //时间选择器
+        TimePickerView pvTime = new TimePickerView.Builder(mContext, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                view.setText(TimeUtils.date2String(date));
+                mStationSaveParams.installTime=TimeUtils.date2String(date);
+            }
+        })
+                .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
+                .setSubmitColor(ContextCompat.getColor(mContext, R.color.textBlue))//确定按钮文字颜色
+                .setCancelColor(ContextCompat.getColor(mContext, R.color.textBlue))//取消按钮文字颜色
+                .isCyclic(false)//循环与否
+                .isCenterLabel(true)
+                .setDate(Calendar.getInstance())// 如果不设置的话，默认是系统时间*/
+                .setRangDate(startDate, endDate)//起始终止年月日设定
+                .build();
+        pvTime.show();
     }
 }
