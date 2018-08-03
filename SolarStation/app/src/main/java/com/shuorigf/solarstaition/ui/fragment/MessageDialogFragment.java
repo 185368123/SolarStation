@@ -156,9 +156,8 @@ public class MessageDialogFragment extends DialogFragment {
 
     public MessageDialogFragment setOnPositiveClickListener(OnPositiveClickListener onPositiveClickListener) {
         if (onPositiveClickListener==null){
-            LogUtils.logd("onPositiveClickListener设置为空");
+
         }else
-            LogUtils.logd("onPositiveClickListener设置不为空");
         this.onPositiveClickListener = onPositiveClickListener;
         return this;
     }

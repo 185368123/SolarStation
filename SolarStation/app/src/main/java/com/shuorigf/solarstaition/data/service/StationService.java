@@ -55,6 +55,13 @@ public interface StationService {
     @FormUrlEncoded
     Flowable<HttpResult<SaveInfo>> saveStation(@FieldMap Map<String, String> map);
 
+    /**
+     * 删除电站
+     */
+    @POST(ApiConstants.STATION_DEL)
+    @FormUrlEncoded
+    Flowable<HttpResult<Object>> deteleStation(@Field(Id.ID) String id);
+
 
     /**
      * 查询充电/放电功率日志

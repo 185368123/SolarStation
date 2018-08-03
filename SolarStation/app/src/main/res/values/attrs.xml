@@ -114,6 +114,7 @@
         <item>@string/project</item>
         <item>@string/power_station</item>
         <item>@string/device</item>
+        <item>@string/vison</item>
     </string-array>
 
     <string-array name="power_station_details_title">

@@ -30,6 +30,7 @@
     <string name="project_number">项目数量</string>
     <string name="power_station_number">电站数量</string>
 
+    <string name="delete">删除</string>
     <string name="month_generating_capacity">当月发电量</string>
     <string name="year_generating_capacity">当年发电量</string>
     <string name="cumulative_generating_capacity">累计发电量</string>
@@ -37,6 +38,7 @@
     <string name="year_electricity_consumption">当年用电量</string>
     <string name="cumulative_electricity_consumption">累计用电量</string>
     <string name="unit_electricity">Mwh</string>
+
 
     <string name="day_generating_capacity">当天发电量</string>
     <string name="day_electricity_consumption">当天用电量</string>
@@ -53,6 +55,7 @@
     <string name="sub_account">子账户</string>
     <string name="company">公司</string>
     <string name="address">地址</string>
+    <string name="vison">版本</string>
     <string name="power_station">电站</string>
     <string name="device">设备</string>
     <string name="log_out">退出登录</string>

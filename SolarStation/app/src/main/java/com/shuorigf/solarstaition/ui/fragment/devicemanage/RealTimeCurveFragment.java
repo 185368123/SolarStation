@@ -124,7 +124,7 @@ public class RealTimeCurveFragment extends BaseFragment {
                 switch (i) {
                     case R.id.rb_real_time_1:
                         setYearMonthShow(false, false);
-                        tvDateRealTime.setVisibility(View.GONE);
+                        tvDateRealTime.setVisibility(View.INVISIBLE);
                         SingleBeans.getInstance().setDate_type("0");
                         SingleBeans.getInstance().setDate(null);
                         mRxManager.post(Constants.REAL_TIME_CURVE_DATA,null);

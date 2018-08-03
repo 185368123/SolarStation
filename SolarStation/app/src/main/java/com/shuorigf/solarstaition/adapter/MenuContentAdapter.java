@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.shuorigf.solarstaition.MyApplication;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.constants.ApiConstants;
 
@@ -43,6 +44,10 @@ public class MenuContentAdapter extends BaseQuickAdapter<Integer, BaseViewHolder
             case R.string.device:
                 content.setTextColor(ContextCompat.getColor(mContext, R.color.textBlue));
                 content.setText(ApiConstants.getUserInfo().deviceCount);
+                break;
+            case R.string.vison:
+                content.setTextColor(ContextCompat.getColor(mContext, R.color.textBlue));
+                content.setText(MyApplication.getVerName());
                 break;
 
         }

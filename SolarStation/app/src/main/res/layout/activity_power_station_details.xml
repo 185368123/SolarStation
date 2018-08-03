@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,14 +12,24 @@
         app:contentInsetStart="0dp"
         app:navigationIcon="@mipmap/ic_back">
 
+            <TextView
+                android:id="@+id/tv_power_station_details_title"
+                style="@style/BaseToolbarTitleStyle"
+                android:drawablePadding="5dp"
+                android:text="@string/default_text" />
 
-        <TextView
-            android:drawablePadding="5dp"
-            android:id="@+id/tv_power_station_details_title"
-            android:text="@string/default_text"
-            style="@style/BaseToolbarTitleStyle"/>
-
-
+            <TextView
+                android:id="@+id/tv_power_station_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:clickable="true"
+                android:text="@string/delete"
+                android:textColor="@color/textWhite"
+                android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout

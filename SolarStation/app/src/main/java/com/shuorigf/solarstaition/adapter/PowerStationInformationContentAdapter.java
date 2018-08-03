@@ -110,7 +110,7 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 }
                 break;
             case R.string.single_battery_voltage:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySingleVoltage);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySingleVoltage+" V");
                 break;
             case R.string.single_battery_capacity:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySingleCapacity);
@@ -125,7 +125,7 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryCount);
                 break;
             case R.string.total_battery_voltage:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryVoltage);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryVoltage+" V");
                 break;
             case R.string.total_battery_capacity:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryCapacity);
@@ -148,7 +148,7 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 }
                 break;
             case R.string.load_power:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.loadPower);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.loadPower+" W");
                 break;
             case R.string.address:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.address);
@@ -157,10 +157,10 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.longitude);
                 break;
             case R.string.maximum_annual_temperature:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.maxAnnualTemper);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.maxAnnualTemper+" ℃");
                 break;
             case R.string.minimum_annual_temperature:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.minAnnualTemper);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.minAnnualTemper+" ℃");
                 break;
             case R.string.geography_remark:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.geoRemark);

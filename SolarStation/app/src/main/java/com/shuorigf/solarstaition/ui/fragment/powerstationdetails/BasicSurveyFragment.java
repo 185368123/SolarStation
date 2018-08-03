@@ -121,6 +121,7 @@ public class BasicSurveyFragment extends BaseFragment {
     public void initData() {
         super.initData();
         initVP();
+        initDeviceList(new ArrayList<DeviceListInfo>());
         getStationData();
         getDeviceList();
     }

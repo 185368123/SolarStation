@@ -6,7 +6,7 @@
               android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <RadioGroup
@@ -21,11 +21,13 @@
                 android:background="@drawable/radiobutton_left_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_14"
                 android:button="@null"
                 android:text="@string/all"/>
             <RadioButton
                 android:id="@+id/rb_real_time_2"
                 android:button="@null"
+                android:textSize="@dimen/text_size_14"
                 android:background="@drawable/radiobutton_center_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,6 +35,7 @@
             <RadioButton
                 android:id="@+id/rb_real_time_3"
                 android:button="@null"
+                android:textSize="@dimen/text_size_14"
                 android:background="@drawable/radiobutton_right_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,17 +47,20 @@
             android:layout_height="1px"
             android:layout_weight="1"/>
         <Button
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_12"
             android:id="@+id/tv_date_real_time"
             android:text="@string/all"
             android:drawableRight="@mipmap/ic_pull_down"
             />
     </LinearLayout>
+
     <View
         style="@style/horizontal_parting_line"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/real_time_curve_viewpager"
         android:layout_width="match_parent"

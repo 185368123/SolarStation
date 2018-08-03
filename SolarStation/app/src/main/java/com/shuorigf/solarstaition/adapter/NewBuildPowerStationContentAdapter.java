@@ -68,6 +68,110 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                 content.setVisibility(View.GONE);
                 break;
         }
+        switch (integer) {
+            case R.string.power_station_name:
+                content.setText(mStationSaveParams.name);
+                break;
+            case R.string.install_date:
+                select.setText(mStationSaveParams.installTime);
+                break;
+            case R.string.design_vendor:
+                content.setText(mStationSaveParams.designer);
+                break;
+            case R.string.total_power_of_battery_board:
+                content.setText(mStationSaveParams.panelPower);
+                break;
+            case R.string.the_quantity_of_battery_board_connected_in_series:
+                content.setText(mStationSaveParams.panelSeriesCount);
+                break;
+            case R.string.the_quantity_of_battery_board_connected_in_parallel:
+                content.setText(mStationSaveParams.panelParallelCount);
+                break;
+            case R.string.power_of_single_battery_board:
+                content.setText(mStationSaveParams.panelSinglePower);
+                break;
+            case R.string.total_quantity_of_battery_board:
+                content.setText(mStationSaveParams.panelCount);
+                break;
+            case R.string.total_open_circuit_voltage_of_battery_board:
+                content.setText(mStationSaveParams.panelVoltage);
+                break;
+            case R.string.total_working_current_of_battery_board:
+                content.setText(mStationSaveParams.panelCurrent);
+                break;
+            case R.string.single_battery_board_vmp:
+                content.setText(mStationSaveParams.panelSingleVmp);
+                break;
+            case R.string.single_battery_board_voc:
+                content.setText(mStationSaveParams.panelSingleVoc);
+                break;
+            case R.string.single_battery_board_imp:
+                content.setText(mStationSaveParams.panelSingleImp);
+                break;
+            case R.string.single_battery_board_isc:
+                content.setText(mStationSaveParams.panelSingleIsc);
+                break;
+            case R.string.battery_board_remark:
+                content.setText(mStationSaveParams.panelRemark);
+                break;
+            case R.string.single_battery_voltage:
+                content.setText(mStationSaveParams.batterySingleVoltage);
+                break;
+            case R.string.single_battery_capacity:
+                content.setText(mStationSaveParams.batterySingleCapacity);
+                break;
+            case R.string.the_quantity_of_battery_connected_in_series:
+                content.setText(mStationSaveParams.batterySeriesCount);
+                break;
+            case R.string.the_quantity_of_battery_connected_in_parallel:
+                content.setText(mStationSaveParams.batteryParallelCount);
+                break;
+            case R.string.total_quantity_of_battery:
+                content.setText(mStationSaveParams.batteryCount);
+                break;
+            case R.string.total_battery_voltage:
+                content.setText(mStationSaveParams.batteryVoltage);
+                break;
+            case R.string.total_battery_capacity:
+                content.setText(mStationSaveParams.batteryCapacity);
+                break;
+            case R.string.storage_battery_remark:
+                content.setText(mStationSaveParams.batteryRemark);
+                break;
+            case R.string.load_power:
+                content.setText(mStationSaveParams.loadPower);
+                break;
+            case R.string.address:
+                content.setText(mStationSaveParams.address);
+                break;
+            case R.string.maximum_annual_temperature:
+                content.setText(mStationSaveParams.maxAnnualTemper);
+                break;
+            case R.string.minimum_annual_temperature:
+                content.setText(mStationSaveParams.minAnnualTemper);
+                break;
+            case R.string.geography_remark:
+                content.setText(mStationSaveParams.geoRemark);
+                break;
+            case R.string.belong_to_project:
+                for (int i = 0; i < SingleBeans.getInstance().getProjectListInfos().size(); i++) {
+                    if (SingleBeans.getInstance().getProjectListInfos().get(i).projectId.equals(mStationSaveParams.projectId)){
+                        select.setText(SingleBeans.getInstance().getProjectListInfos().get(i).projectName);
+                    }
+                }
+
+                break;
+            case R.string.type_of_battery_board:
+                select.setText(mStationSaveParams.panelType);
+                break;
+            case R.string.type_of_storage_battery:
+                select.setText(mStationSaveParams.batteryType);
+                break;
+            case R.string.load_type:
+                select.setText(mStationSaveParams.loadType);
+                break;
+        }
+
 
         select.setOnClickListener(new View.OnClickListener() {
             @Override
