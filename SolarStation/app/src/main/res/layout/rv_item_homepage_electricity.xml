@@ -7,9 +7,11 @@
               android:orientation="vertical">
 
     <TextView
-        android:singleLine="true"
         android:id="@+id/tv_electricity_value"
         style="@style/LargeBlackTextSizeStyle"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/default_text"/>

@@ -20,6 +20,6 @@ public class PopupDeviceAdapter extends BaseQuickAdapter<DeviceListInfo, BaseVie
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, DeviceListInfo projectListInfo) {
-        baseViewHolder.setText(R.id.tv_title, projectListInfo.id);
+        baseViewHolder.setText(R.id.tv_title, projectListInfo.model);
     }
 }

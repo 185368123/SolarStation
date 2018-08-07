@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,8 +13,15 @@
             android:id="@+id/iv_power_station_information_icon"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:scaleType="fitXY"
-            />
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_power_station_information_icon"
+            style="@style/NormalGrayTextSizeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/click_change_power_station_photos" />
 
 
         <android.support.v7.widget.RecyclerView
@@ -23,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
-            app:layoutManager="LinearLayoutManager"/>
+            app:layoutManager="LinearLayoutManager" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

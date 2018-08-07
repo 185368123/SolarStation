@@ -28,6 +28,7 @@ import com.shuorigf.solarstaition.util.LogUtils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -51,7 +52,6 @@ public class DeviceListFragment extends BaseFragment {
     private String mStationId;
 
     public static DeviceListFragment newInstance() {
-
         Bundle args = new Bundle();
         DeviceListFragment fragment = new DeviceListFragment();
         fragment.setArguments(args);
@@ -205,6 +205,7 @@ public class DeviceListFragment extends BaseFragment {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+
                 getDeviceList();
             }
         });
@@ -212,6 +213,7 @@ public class DeviceListFragment extends BaseFragment {
         mRxManager.on(Constants.REFSH_DEVICE_DATA, new Action1<Object>() {
             @Override
             public void call(Object o) {
+                initDeviceList(new ArrayList<DeviceListInfo>());
                 getDeviceList();
             }
         });

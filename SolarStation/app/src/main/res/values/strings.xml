@@ -193,6 +193,7 @@
     <string name="editable_details">可编辑详细内容</string>
     <string name="click_selection">点击选择</string>
     <string name="click_add_power_station_photos">点击添加电站照片</string>
+    <string name="click_change_power_station_photos">点击图片修改电站照片</string>
 
     <string name="real_time_monitoring">实时监控</string>
     <string name="real_time_curve">实时曲线</string>
@@ -296,6 +297,7 @@
     <string name="editing_device">编辑设备</string>
     <string name="save">保存</string>
     <string name="save_success">保存成功</string>
+    <string name="change_success">修改成功</string>
     <string name="add_success">添加成功</string>
     <string name="product_model">产品型号</string>
     <string name="product_type">产品类型</string>
@@ -349,6 +351,7 @@
     <string name="add_now">立刻添加</string>
 
     <string name="no_value">修改参数不能为空</string>
-
+    <string name="device_type_0">控制器</string>
+    <string name="device_type_1">逆变器</string>
 
 </resources>

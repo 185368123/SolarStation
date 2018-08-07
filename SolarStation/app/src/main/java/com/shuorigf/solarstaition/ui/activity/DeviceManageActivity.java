@@ -48,9 +48,9 @@ import io.reactivex.subscribers.DisposableSubscriber;
  */
 
 public class DeviceManageActivity extends BaseActivity {
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
     @BindView(R.id.device_manage_tablayout)
     TabLayout mTabLayout;
     @BindView(R.id.device_manage_viewpager)
@@ -59,6 +59,7 @@ public class DeviceManageActivity extends BaseActivity {
     TypedArray mTabTitles;
     @BindView(R.id.tv_device_manage_title)
     TextView mTitleTv;
+
     private PopupWindow mPopupWindow;
     private DeviceService mDeviceService;
 
@@ -116,31 +117,15 @@ public class DeviceManageActivity extends BaseActivity {
     }
 
     private void showDevicePopup() {
-        View contentView = LayoutInflater.from(this).inflate(R.layout.popupwindow_project, null, false);
-        RecyclerView rv = contentView.findViewById(R.id.rv_project);
-        contentView.findViewById(R.id.tv_new_build_project).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NewBuildProjectDialogFragment newBuildProjectDialogFragment = NewBuildProjectDialogFragment.newInstance();
-                newBuildProjectDialogFragment.setOnSaveSuccessListener(new NewBuildProjectDialogFragment.OnSaveSuccessListener() {
-                    @Override
-                    public void OnSaveSuccess(String id) {
-                        getDeviceList();
-                    }
-                });
-                newBuildProjectDialogFragment.show(getSupportFragmentManager(), "");
-                if (mPopupWindow != null) {
-                    mPopupWindow.dismiss();
-                }
-            }
-        });
+        View contentView = LayoutInflater.from(this).inflate(R.layout.popupwindow_device, null, false);
+        RecyclerView rv = contentView.findViewById(R.id.rv_device);
         PopupDeviceAdapter deviceAdapter = new PopupDeviceAdapter(deviceListInfos);
         deviceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mDeviceListInfo = (DeviceListInfo) adapter.getItem(position);
                 if (mDeviceListInfo != null) {
-                    mTitleTv.setText(mDeviceListInfo.id);
+                    mTitleTv.setText(mDeviceListInfo.model);
                     mRxManager.post(Constants.REFSH_ALL_DEVICE_DATA,mDeviceListInfo.id);
                 }
                 if (mPopupWindow != null) {

@@ -12,7 +12,19 @@
         android:layout_centerVertical="true"
         style="@style/NormalBlackTextSizeStyle"
         />
-
+    <TextView
+        android:visibility="gone"
+        android:text="@string/click_selection"
+        android:id="@+id/tv_select"
+        style="@style/NormalGrayTextSizeStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/tv_title"
+        android:layout_toRightOf="@+id/tv_title"
+        android:gravity="end"
+        android:singleLine="true"
+        />
     <EditText
         android:hint="@string/editable_details"
         android:background="@null"

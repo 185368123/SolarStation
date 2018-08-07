@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.adapter.CommonFragmentPagerAdapter;
@@ -83,14 +83,32 @@ public class MainActivity extends BaseActivity {
         mBottomTabs.setupWithViewPager(mViewpager);
     }
 
-
-    @Override
+   /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             moveTaskToBack(true);
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
+    boolean isFirst = true;
+    long lastTime;
+
+    //在按下返回键的时候会回调
+    public void onBackPressed() {
+        if (isFirst) {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            lastTime = System.currentTimeMillis();
+            isFirst = false;
+        } else {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastTime <= 2000) {
+                finish();
+            } else {
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                lastTime = System.currentTimeMillis();
+            }
+        }
+    }
 }

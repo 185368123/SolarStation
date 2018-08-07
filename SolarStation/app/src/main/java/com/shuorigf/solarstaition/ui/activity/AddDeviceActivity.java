@@ -32,6 +32,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class AddDeviceActivity extends BaseActivity {
+
     @BindArray(R.array.edit_device_title)
     TypedArray mTitle;
 

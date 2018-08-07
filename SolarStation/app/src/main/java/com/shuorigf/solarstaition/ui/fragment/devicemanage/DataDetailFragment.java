@@ -25,6 +25,7 @@ import com.shuorigf.solarstaition.data.params.device.DeviceDataLogTableParams;
 import com.shuorigf.solarstaition.data.response.device.DeviceDataLogTableListInfo;
 import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.util.DisposableManager;
+import com.shuorigf.solarstaition.util.LogUtils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.TimeUtils;
 import com.shuorigf.solarstaition.util.ToastUtil;
@@ -62,6 +63,7 @@ public class DataDetailFragment extends BaseFragment {
 
 
     private DeviceService mDeviceService;
+    int data_type_position=0;
 
 
     private DeviceDataLogTableParams mDeviceDataLogTableParams = new DeviceDataLogTableParams();
@@ -170,6 +172,7 @@ public class DataDetailFragment extends BaseFragment {
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 mDeviceDataLogTableParams.type = options1 + "";
                 view.setText(data_detail_title.getString(options1));
+                data_type_position=options1;
                initData();
             }
         })
@@ -180,6 +183,7 @@ public class DataDetailFragment extends BaseFragment {
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
                 .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(data_type_position)
                 .build();
         List<String> list = new ArrayList<>();
         for (int i = 0; i < SingleBeans.getInstance().getProjectListInfos().size(); i++) {
@@ -195,7 +199,7 @@ public class DataDetailFragment extends BaseFragment {
         startDate.set(2018,0,1);
         Calendar endDate = Calendar.getInstance();
         endDate.set(2020,11,31);
-
+        LogUtils.logd(startDate.toString());
 
         //时间选择器
         TimePickerView pvTime = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {

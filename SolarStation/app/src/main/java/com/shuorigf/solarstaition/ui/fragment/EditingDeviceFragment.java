@@ -49,7 +49,6 @@ public class EditingDeviceFragment extends BaseFragment {
     private DeviceSaveParams mDeviceSaveParams = new DeviceSaveParams();
 
     public static EditingDeviceFragment newInstance() {
-
         Bundle args = new Bundle();
         EditingDeviceFragment fragment = new EditingDeviceFragment();
         fragment.setArguments(args);

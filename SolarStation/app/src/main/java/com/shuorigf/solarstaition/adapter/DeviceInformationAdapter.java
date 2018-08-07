@@ -20,7 +20,7 @@ public class DeviceInformationAdapter extends BaseQuickAdapter<DeviceListInfo, B
     }
     @Override
     protected void convert(BaseViewHolder baseViewHolder, DeviceListInfo deviceListInfo) {
-        baseViewHolder.setText(R.id.tv_name, deviceListInfo.type);
+        baseViewHolder.setText(R.id.tv_name, deviceListInfo.model);
         TextView status = baseViewHolder.getView(R.id.tv_status);
         switch (deviceListInfo.status) {
             case DeviceListInfo.STATUS_NORMAL:

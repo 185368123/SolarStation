@@ -84,6 +84,9 @@ public class AlarmFragment extends BaseFragment {
 
     private AlarmListParams mAlarmListParams = new AlarmListParams();
 
+    int position_1=0;
+    int position_2=0;
+    int position_3=0;
     public AlarmFragment() {
 
     }
@@ -352,6 +355,7 @@ public class AlarmFragment extends BaseFragment {
         OptionsPickerView mOptionsPickerView = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                position_1=options1;
                 if (options1 == 0){
                     mAlarmListParams.alarmType = null;
                     view.setText(R.string.type);
@@ -369,6 +373,7 @@ public class AlarmFragment extends BaseFragment {
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
                 .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(position_1)
                 .build();
         List<String> list = new ArrayList<>();
         for (int i = 0; i < alarm_type_title.length(); i++) {
@@ -383,6 +388,7 @@ public class AlarmFragment extends BaseFragment {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 view.setText(alarm_marked_title.getString(options1));
+                position_2=options1;
                 if (options1==0){
                     mAlarmListParams.label = null;
                 }else
@@ -397,6 +403,7 @@ public class AlarmFragment extends BaseFragment {
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
                 .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(position_2)
                 .build();
         List<String> list = new ArrayList<>();
         for (int i = 0; i < alarm_marked_title.length(); i++) {
@@ -410,12 +417,13 @@ public class AlarmFragment extends BaseFragment {
         OptionsPickerView mOptionsPickerView = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                position_3=options1;
                 if (options1 == 0) {
                     mAlarmListParams.deviceId = null;
                     view.setText(R.string.all_device);
                 } else{
                     mAlarmListParams.deviceId = mDeviceList.get(options1 - 1).id;
-                    view.setText(mDeviceList.get(options1-1).id);
+                    view.setText(mDeviceList.get(options1-1).model);
                 }
                 getAlarmList();
             }
@@ -427,11 +435,12 @@ public class AlarmFragment extends BaseFragment {
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
                 .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(position_3)
                 .build();
         List<String> list = new ArrayList<>();
         list.add(getContext().getResources().getString(R.string.all_device));
         for (int i = 0; i < mDeviceList.size(); i++) {
-            list.add(mDeviceList.get(i).id);
+            list.add(mDeviceList.get(i).model);
         }
         mOptionsPickerView.setPicker(list);//添加数据源
         mOptionsPickerView.show();

@@ -25,7 +25,7 @@ String mStationId;
     }
     @Override
     protected void convert(BaseViewHolder baseViewHolder, final DeviceListInfo deviceListInfo) {
-        baseViewHolder.setText(R.id.tv_name, deviceListInfo.type);
+        baseViewHolder.setText(R.id.tv_name, deviceListInfo.model);
         TextView status = baseViewHolder.getView(R.id.tv_status);
         switch (deviceListInfo.status) {
             case DeviceListInfo.STATUS_NORMAL:
@@ -41,7 +41,7 @@ String mStationId;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), DeviceManageActivity.class);
-                intent.putExtra(Constants.DEVICE_NAME, deviceListInfo.type);
+                intent.putExtra(Constants.DEVICE_NAME, deviceListInfo.model);
                 intent.putExtra(Constants.DEVICE_ID, deviceListInfo.id);
                 intent.putExtra(Constants.STATION_ID, mStationId);
                 view.getContext().startActivity(intent);

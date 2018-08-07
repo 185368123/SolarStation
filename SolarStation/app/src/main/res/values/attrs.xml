@@ -328,5 +328,8 @@
         <item>@string/already_marked</item>
         <item>@string/already_unmarked</item>
     </string-array>
-
+    <string-array name="device_type_title">
+        <item>@string/device_type_0</item>
+        <item>@string/device_type_1</item>
+    </string-array>
 </resources>

@@ -74,6 +74,7 @@ public class BasicSurveyFragment extends BaseFragment {
 
     @BindArray(R.array.basic_survey_chart_title)
     TypedArray mPowerTitle;
+
     private DeviceService mDeviceService;
     private StationService mStationService;
 
@@ -265,6 +266,7 @@ public class BasicSurveyFragment extends BaseFragment {
         mRxManager.on(Constants.REFSH_DEVICE_DATA, new Action1<Object>() {
             @Override
             public void call(Object o) {
+                initDeviceList(new ArrayList<DeviceListInfo>());
                getDeviceList();
             }
         });
