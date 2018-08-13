@@ -14,6 +14,7 @@ import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.data.linechart.LineChartData;
 import com.shuorigf.solarstaition.data.response.project.ProjectDataInfo;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class ProjectChartAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
 
     private ProjectDataInfo projectDataInfo;
-
+    DecimalFormat df = new DecimalFormat("0.0000");
     public ProjectChartAdapter(List<Integer> data, ProjectDataInfo projectDataInfo) {
         super(R.layout.rv_item_project_chart, data);
         this.projectDataInfo = projectDataInfo == null ? new ProjectDataInfo() : projectDataInfo;
@@ -54,7 +55,9 @@ public class ProjectChartAdapter extends BaseQuickAdapter<Integer, BaseViewHolde
         }
         chartValue.setTextColor(color);
         if (values != null && values.length > 0) {
-            chartValue.setText(values[values.length - 1]);
+            float value_f=Float.parseFloat(values[values.length - 1]);
+            value_f=value_f/1000000;
+            chartValue.setText(df.format(value_f)+"");
             LineChartData lineChartData = new LineChartData();
             List<Float> list = new ArrayList<>();
             for (String value : values) {

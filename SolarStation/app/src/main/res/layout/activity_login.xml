@@ -24,9 +24,9 @@
             android:layout_marginLeft="22dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="5dp"
-            android:drawableEnd="@mipmap/ic_logo"
+            android:drawableEnd="@mipmap/ic_login_logo"
             android:drawablePadding="10dp"
-            android:drawableRight="@mipmap/ic_logo"
+            android:drawableRight="@mipmap/ic_login_logo"
             android:text="@string/welcome_back"/>
 
         <TextView

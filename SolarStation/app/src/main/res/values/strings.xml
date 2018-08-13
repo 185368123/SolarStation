@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SolarStation</string>
+    <string name="app_name">光伏云电站</string>
 
     <string name="welcome_back">Welcome Back</string>
     <string name="sign_in_to_continue">Sign in to continue</string>

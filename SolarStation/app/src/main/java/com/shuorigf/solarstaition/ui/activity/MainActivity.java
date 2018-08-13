@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity {
     @BindArray(R.array.main_bottom_icon)
     TypedArray mTabIcons;
 
-
     /**
      * get layout resources id
      *

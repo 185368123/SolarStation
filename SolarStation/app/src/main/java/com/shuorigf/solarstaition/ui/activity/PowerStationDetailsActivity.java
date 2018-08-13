@@ -123,6 +123,7 @@ public class PowerStationDetailsActivity extends BaseActivity {
                     public void onNext(Object o) {
                         mRxManager.post(Constants.INIT_STATION_DETAIL,"");
                         finish();
+                        mRxManager.post(Constants.REFSH_HOME_FRAGMENT_DATA,"");
                         ToastUtil.showShortToast(PowerStationDetailsActivity.this, getResources().getString(R.string.delete_success));
                     }
 

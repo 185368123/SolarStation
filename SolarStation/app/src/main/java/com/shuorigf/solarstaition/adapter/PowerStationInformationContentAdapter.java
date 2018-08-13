@@ -76,16 +76,16 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelCurrent+" A");
                 break;
             case R.string.single_battery_board_vmp:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleVmp);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleVmp+" V");
                 break;
             case R.string.single_battery_board_voc:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleVoc);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleVoc+" V");
                 break;
             case R.string.single_battery_board_imp:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleImp);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleImp+" A");
                 break;
             case R.string.single_battery_board_isc:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleIsc);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelSingleIsc+" A");
                 break;
             case R.string.battery_board_remark:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.panelRemark);
@@ -113,7 +113,7 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySingleVoltage+" V");
                 break;
             case R.string.single_battery_capacity:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySingleCapacity);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySingleCapacity+" Ah");
                 break;
             case R.string.the_quantity_of_battery_connected_in_series:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batterySeriesCount);
@@ -128,7 +128,7 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryVoltage+" V");
                 break;
             case R.string.total_battery_capacity:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryCapacity);
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryCapacity+" Ah");
                 break;
             case R.string.storage_battery_remark:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.batteryRemark);

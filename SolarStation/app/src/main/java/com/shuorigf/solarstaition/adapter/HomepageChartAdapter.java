@@ -10,6 +10,7 @@ import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.data.linechart.LineChartData;
 import com.shuorigf.solarstaition.data.response.home.HomeDataInfo;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,13 @@ public class HomepageChartAdapter extends BaseQuickAdapter<Integer, BaseViewHold
                 break;
         }
         chartValue.setTextColor(color);
+
+        for (int i = 0; i < values.length; i++) {//s三位小数保留一位小数
+            float value_f=Float.parseFloat(values[i]);
+            DecimalFormat df = new DecimalFormat("0.0000");
+            value_f=value_f/1000000;
+           values[i]=df.format(value_f)+"";
+        }
         if (values != null && values.length > 0) {
             chartValue.setText(values[values.length - 1]);
             LineChartData lineChartData = new LineChartData();

@@ -8,6 +8,7 @@ import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.data.IconText;
 import com.shuorigf.solarstaition.data.response.project.ProjectDataInfo;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 public class ProjectSaveAdapter extends BaseQuickAdapter<IconText, BaseViewHolder> {
 
     private ProjectDataInfo projectDataInfo;
-
+    DecimalFormat df = new DecimalFormat("0.0000");
     public ProjectSaveAdapter(List<IconText> data, ProjectDataInfo projectDataInfo) {
         super(R.layout.rv_item_project_save, data);
         this.projectDataInfo = projectDataInfo == null ? new ProjectDataInfo() : projectDataInfo;
@@ -29,7 +30,9 @@ public class ProjectSaveAdapter extends BaseQuickAdapter<IconText, BaseViewHolde
         save.setCompoundDrawablesWithIntrinsicBounds(iconText.icon, 0, 0, 0);
         switch (iconText.title) {
             case R.string.save_electricity:
-                baseViewHolder.setText(R.id.tv_save_value, String.format(mContext.getString(R.string.format_electricity), projectDataInfo.electricSaving));
+                float value_f=Float.parseFloat(projectDataInfo.electricSaving);
+                value_f=value_f/1000000;
+                baseViewHolder.setText(R.id.tv_save_value, String.format(mContext.getString(R.string.format_electricity),df.format(value_f)+"" ));
                 break;
             case R.string.save_standard_coal:
                 baseViewHolder.setText(R.id.tv_save_value, String.format(mContext.getString(R.string.format_ton), projectDataInfo.coalSaving));

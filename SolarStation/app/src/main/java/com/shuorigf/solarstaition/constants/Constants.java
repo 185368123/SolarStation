@@ -45,4 +45,6 @@ public class Constants {
     public static final String REFSH_DEVICE_DATA = "refsh_device_data";
     public static final String REFSH_ALL_DEVICE_DATA = "refsh_all_device_data";
 
+    public static final String REFSH_HOME_FRAGMENT_DATA = "refsh_home_fragment_data";
+
 }

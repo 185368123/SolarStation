@@ -14,6 +14,7 @@ import com.shuorigf.solarstaition.adapter.HomepageElectricityAdapter;
 import com.shuorigf.solarstaition.adapter.HomepageNumberAdapter;
 import com.shuorigf.solarstaition.adapter.HomepageSaveAdapter;
 import com.shuorigf.solarstaition.base.BaseFragment;
+import com.shuorigf.solarstaition.constants.Constants;
 import com.shuorigf.solarstaition.data.IconText;
 import com.shuorigf.solarstaition.data.exception.ResponseMessageException;
 import com.shuorigf.solarstaition.data.flowable.HttpResultFlatMapFunction;
@@ -37,6 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
+import rx.functions.Action1;
 
 /**
  * Created by clx on 2017/9/28.
@@ -208,7 +210,12 @@ public class HomePageFragment extends BaseFragment {
      */
     @Override
     protected void initEvent() {
-
+       mRxManager.on(Constants.REFSH_HOME_FRAGMENT_DATA, new Action1<Object>() {
+           @Override
+           public void call(Object o) {
+               initData();
+           }
+       });
     }
 
 

@@ -32,6 +32,7 @@ public class EditingDeviceAdapter extends BaseQuickAdapter<Integer, BaseViewHold
     @BindArray(R.array.device_type_title)
     TypedArray device_type_title;
 
+    int position=0;
     private DeviceSaveParams deviceSaveParams;
 
     public EditingDeviceAdapter(List<Integer> data, DeviceSaveParams deviceSaveParams) {
@@ -59,8 +60,10 @@ public class EditingDeviceAdapter extends BaseQuickAdapter<Integer, BaseViewHold
                 if (deviceSaveParams.type!=null){
                     if (deviceSaveParams.type.equals("0")){
                         select.setText(R.string.device_type_0);
+                        position=0;
                     }else {
                         select.setText(R.string.device_type_1);
+                        position=1;
                     }
                 }
                 break;
@@ -135,6 +138,7 @@ public class EditingDeviceAdapter extends BaseQuickAdapter<Integer, BaseViewHold
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 view.setText(device_type_title.getString(options1));
                 deviceSaveParams.type=options1+"";
+                position=options1;
             }
         })
                 .setSubCalSize(15)//确定和取消文字大小
@@ -144,6 +148,7 @@ public class EditingDeviceAdapter extends BaseQuickAdapter<Integer, BaseViewHold
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
                 .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(position)
                 .build();
         List<String> list = new ArrayList<>();
         for (int i = 0; i < device_type_title.length(); i++) {

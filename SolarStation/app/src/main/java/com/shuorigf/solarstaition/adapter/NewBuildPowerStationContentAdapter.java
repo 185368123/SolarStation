@@ -17,6 +17,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.data.SingleBeans;
 import com.shuorigf.solarstaition.data.params.station.StationSaveParams;
+import com.shuorigf.solarstaition.data.response.common.BatteryTypeInfo;
+import com.shuorigf.solarstaition.data.response.common.LoadTypeInfo;
+import com.shuorigf.solarstaition.data.response.common.PanelTypeInfo;
 import com.shuorigf.solarstaition.util.TimeUtils;
 
 import java.util.ArrayList;
@@ -38,6 +41,10 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
     TypedArray mStorageBatteryTypeTitle;
     @BindArray(R.array.load_type_title)
     TypedArray mLoadTypeTitle;
+    int position_1=0;
+    int position_2=0;
+    int position_3=0;
+    int position_4=0;
 
     private StationSaveParams mStationSaveParams;
 
@@ -73,7 +80,9 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                 content.setText(mStationSaveParams.name);
                 break;
             case R.string.install_date:
-                select.setText(mStationSaveParams.installTime);
+                if (mStationSaveParams.installTime!=null){
+                    select.setText(mStationSaveParams.installTime);
+                }
                 break;
             case R.string.design_vendor:
                 content.setText(mStationSaveParams.designer);
@@ -157,18 +166,76 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                 for (int i = 0; i < SingleBeans.getInstance().getProjectListInfos().size(); i++) {
                     if (SingleBeans.getInstance().getProjectListInfos().get(i).projectId.equals(mStationSaveParams.projectId)){
                         select.setText(SingleBeans.getInstance().getProjectListInfos().get(i).projectName);
+                        position_1=i;
                     }
                 }
 
                 break;
             case R.string.type_of_battery_board:
-                select.setText(mStationSaveParams.panelType);
+                if (mStationSaveParams.panelType!=null){
+                    switch (new Integer(mStationSaveParams.panelType)) {
+                        case PanelTypeInfo.TYPE_SINGLE:
+                            position_2=0;
+                            select.setText(R.string.single_crystalline_silicon);
+                            break;
+                        case PanelTypeInfo.TYPE_MULTI:
+                            position_2=1;
+                            select.setText(R.string.multi_crystalline_silicon);
+                            break;
+                        case PanelTypeInfo.TYPE_NON:
+                            position_2=2;
+                            select.setText(R.string.non_crystalline_silicon);
+                            break;
+                        case PanelTypeInfo.TYPE_OTHER:
+                            position_2=3;
+                            select.setText(R.string.other_crystalline_silicon);
+                            break;
+                    }
+                }
                 break;
             case R.string.type_of_storage_battery:
-                select.setText(mStationSaveParams.batteryType);
+                if (mStationSaveParams.batteryType!=null){
+                    switch (new Integer(mStationSaveParams.batteryType)) {
+                        case BatteryTypeInfo.TYPE_CUSTOM:
+                            select.setText(R.string.custom);
+                            position_3=0;
+                            break;
+                        case BatteryTypeInfo.TYPE_OPEN:
+                            select.setText(R.string.open_mouth);
+                            position_3=1;
+                            break;
+                        case BatteryTypeInfo.TYPE_SEAL:
+                            select.setText(R.string.seal);
+                            position_3=2;
+                            break;
+                        case BatteryTypeInfo.TYPE_COLLOID:
+                            select.setText(R.string.colloid);
+                            position_3=3;
+                            break;
+                        case BatteryTypeInfo.TYPE_LITHIUM_BATTERY:
+                            position_3=4;
+                            select.setText(R.string.lithium_battery);
+                            break;
+                    }
+                }
                 break;
             case R.string.load_type:
-                select.setText(mStationSaveParams.loadType);
+                if (mStationSaveParams.loadType!=null){
+                    switch (new Integer(mStationSaveParams.loadType)) {
+                        case LoadTypeInfo.TYPE_DC:
+                            select.setText(R.string.dc);
+                            position_4=0;
+                            break;
+                        case LoadTypeInfo.TYPE_AC:
+                            select.setText(R.string.ac);
+                            position_4=1;
+                            break;
+                        case LoadTypeInfo.TYPE_BOTH:
+                            select.setText(R.string.dc_and_ac);
+                            position_4=2;
+                            break;
+                    }
+                }
                 break;
         }
 
@@ -304,6 +371,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 view.setText(SingleBeans.getInstance().getProjectListInfos().get(options1).projectName);
+                position_1=options1;
                 mStationSaveParams.projectId=SingleBeans.getInstance().getProjectListInfos().get(options1).projectId;
             }
         })
@@ -313,6 +381,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                 .setTitleBgColor(ContextCompat.getColor(mContext, R.color.white))//标题背景颜色 Night mode
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
+                .setSelectOptions(position_1)
                 .setCyclic(false, false, false)//循环与否
                 .build();
         List<String> list = new ArrayList<>();
@@ -329,6 +398,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 mStationSaveParams.panelType = String.valueOf(options1);
+                position_2=options1;
                 view.setText(mBatteryBoardTypeTitle.getString(options1));
             }
         })
@@ -338,6 +408,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                 .setTitleBgColor(ContextCompat.getColor(mContext, R.color.white))//标题背景颜色 Night mode
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
+                .setSelectOptions(position_2)
                 .setCyclic(false, false, false)//循环与否
                 .build();
         List<String> list = new ArrayList<>();
@@ -355,6 +426,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 mStationSaveParams.batteryType = String.valueOf(options1);
+                position_3=options1;
                 view.setText(mStorageBatteryTypeTitle.getString(options1));
             }
         })
@@ -364,6 +436,7 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                 .setTitleBgColor(ContextCompat.getColor(mContext, R.color.white))//标题背景颜色 Night mode
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setContentTextSize(18)//滚轮文字大小
+                .setSelectOptions(position_3)
                 .setCyclic(false, false, false)//循环与否
                 .build();
         List<String> list = new ArrayList<>();
@@ -381,11 +454,13 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 mStationSaveParams.loadType = String.valueOf(options1);
+                position_4=options1;
                 view.setText(mLoadTypeTitle.getString(options1));
             }
         })
                 .setSubmitColor(ContextCompat.getColor(mContext, R.color.textBlue))//确定按钮文字颜色
                 .setCancelColor(ContextCompat.getColor(mContext, R.color.textBlue))//取消按钮文字颜色
+                .setSelectOptions(position_4)
                 .setCyclic(false, false, false)//循环与否
                 .build();
         List<String> list = new ArrayList<>();

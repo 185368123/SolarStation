@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.data.response.home.HomeDataInfo;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -56,7 +57,12 @@ public class HomepageElectricityAdapter extends BaseQuickAdapter<Integer, BaseVi
                 break;
         }
         if (values != null && values.length > 0) {
-            baseViewHolder.setText(R.id.tv_electricity_value, values[values.length - 1]);
+            float value_f=Float.parseFloat(values[values.length-1]);
+            DecimalFormat df = new DecimalFormat("0.0000");
+            value_f=value_f/1000000;
+            baseViewHolder.setText(R.id.tv_electricity_value,df.format(value_f)+"");
+           /* String value=values[values.length - 1];
+            baseViewHolder.setText(R.id.tv_electricity_value,value.substring(0,value.length()-2) );*/
         }
 
     }
