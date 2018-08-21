@@ -22,7 +22,7 @@ public class JsonUntils {
                 list.add(sKey);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            return new String[]{};
         }
         return list.toArray(new String[list.size()]);
     }
@@ -38,7 +38,7 @@ public class JsonUntils {
                 list.add(Float.parseFloat(json.optString(sKey)));
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            return list;
         }
         return list;
     }

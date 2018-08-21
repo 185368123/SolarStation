@@ -22,6 +22,7 @@ import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.ui.view.MyXFormatter;
 import com.shuorigf.solarstaition.util.DisposableManager;
 import com.shuorigf.solarstaition.util.JsonUntils;
+import com.shuorigf.solarstaition.util.LogUtils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
@@ -131,22 +132,11 @@ public class RealTimeCurveChartFragment extends BaseFragment {
 
 
     private void initLineChart(LineChart lineChart) {
-        // enable touch gestures
         lineChart.setTouchEnabled(false);
 
-        // enable scaling and dragging
-//        mLineChart.setDragEnabled(false);
-//        mLineChart.setScaleEnabled(false);
         lineChart.getDescription().setEnabled(false);
         lineChart.setNoDataText("");
-        // set an alternative background color
-        // mChart.setBackgroundColor(Color.GRAY);
         lineChart.setPinchZoom(false);
-        // create a custom MarkerView (extend MarkerView) and specify the layout
-        // to use for it
-//        MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
-//        mv.setChartView(mLineChart); // For bounds control
-//        mLineChart.setMarker(mv); // Set the marker to the chart
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setTextColor(ContextCompat.getColor(getContext(), R.color.textGray));
@@ -176,12 +166,14 @@ public class RealTimeCurveChartFragment extends BaseFragment {
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setAxisMinimum(Float.parseFloat(deviceDataLogChartInfo.min) - 1);
         leftAxis.setAxisMaximum(Float.parseFloat(deviceDataLogChartInfo.max) + 1);
-
+        LogUtils.logd("X_VALUE:"+X_VALUE.length);
+        if (X_VALUE.length==0){
+            X_VALUE=new String[]{"暂无数据"};
+        }
+        LogUtils.logd("X_VALUE:"+X_VALUE[0]);
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setLabelCount(X_VALUE.length);
         xAxis.setValueFormatter(new MyXFormatter(X_VALUE));
-
-
     }
 
     /**

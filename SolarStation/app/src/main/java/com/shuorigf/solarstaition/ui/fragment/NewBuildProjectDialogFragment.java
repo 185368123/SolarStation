@@ -17,6 +17,7 @@ import android.view.WindowManager;
 
 import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.adapter.NewBuildProjectAdapter;
+import com.shuorigf.solarstaition.constants.Constants;
 import com.shuorigf.solarstaition.data.exception.ResponseMessageException;
 import com.shuorigf.solarstaition.data.flowable.HttpResultLoadingTransformer;
 import com.shuorigf.solarstaition.data.params.project.ProjectSaveParams;
@@ -25,6 +26,7 @@ import com.shuorigf.solarstaition.data.service.ProjectService;
 import com.shuorigf.solarstaition.util.ConvertUtils;
 import com.shuorigf.solarstaition.util.DisposableManager;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
+import com.shuorigf.solarstaition.util.RxManager;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class NewBuildProjectDialogFragment extends DialogFragment {
 
     private ProjectService mProjectService;
 
+    private RxManager mRxManager=new RxManager();
     private ProjectSaveParams mProjectSaveParams = new ProjectSaveParams();
 
 
@@ -153,6 +156,7 @@ public class NewBuildProjectDialogFragment extends DialogFragment {
                         if (mOnSaveSuccessListener != null) {
                             mOnSaveSuccessListener.OnSaveSuccess(s.id);
                         }
+                        mRxManager.post(Constants.REFSH_HOME_FRAGMENT_DATA, null);
                         dismiss();
                     }
 
@@ -183,4 +187,5 @@ public class NewBuildProjectDialogFragment extends DialogFragment {
     public interface OnSaveSuccessListener {
         void OnSaveSuccess(String id);
     }
+
 }

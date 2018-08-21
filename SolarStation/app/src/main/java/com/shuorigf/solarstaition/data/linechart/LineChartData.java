@@ -29,7 +29,7 @@ public class LineChartData {
 
 	public void addLine(List<Float> yVal,int color, boolean drawFilled, boolean drawCircleHole)
 	{
-		if(yVal == null)
+		if(yVal == null||yVal.size()==0)
 			return;
 		LineInfoData data = new LineInfoData(yVal,color, drawFilled, drawCircleHole);
 		mLinDataList.add(data);

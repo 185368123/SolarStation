@@ -323,6 +323,7 @@ public class NewBuildPowerStationFragment extends BaseFragment {
                     @Override
                     public void onNext(SaveInfo s) {
                         mRxManager.post(Constants.INIT_STATION_DETAIL, null);
+                        mRxManager.post(Constants.REFSH_HOME_FRAGMENT_DATA, null);
                         ToastUtil.showShortToast(getContext(), R.string.new_build_success);
                         getActivity().finish();
                     }
