@@ -182,7 +182,9 @@
     <string name="ac">交流</string>
     <string name="dc_and_ac">直流+交流</string>
 
-    <string name="coordinate">坐标</string>
+    <string name="altitude">海拔</string>
+    <string name="longitude">经度</string>
+    <string name="latitude">纬度</string>
     <string name="maximum_annual_temperature">最高年气温</string>
     <string name="minimum_annual_temperature">最低年气温</string>
     <string name="geography_remark">备注</string>

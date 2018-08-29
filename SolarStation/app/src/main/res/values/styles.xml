@@ -12,7 +12,7 @@
     <style name="BaseToolbarStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@mipmap/home_title_bg</item>
     </style>
 
     <style name="BaseToolbarTitleStyle">

@@ -5,8 +5,8 @@ ext {
                applicationId    : "com.shuorigf.solarstaition",
                minSdkVersion    : 14,
                targetSdkVersion : 26,
-               versionCode      : 5,
-               versionName      : "1.0.5"]
+               versionCode      : 7,
+               versionName      : "1.0.7"]
 
     libsVersion = [
             // 第三方库版本号的管理

@@ -1,13 +1,21 @@
 package com.shuorigf.solarstaition.base;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.shuorigf.solarstaition.R;
 import com.shuorigf.solarstaition.util.RxManager;
 
 import java.lang.reflect.Field;
@@ -26,6 +34,7 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
     private boolean isFirstLoad = true;
     private Unbinder unbinder;
     public RxManager mRxManager;
+    protected Toolbar toolbar;
 
     protected View root;
 
@@ -40,7 +49,10 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
         return root;
     }
 
-
+    @IdRes
+    protected int getToolbarId() {
+        return R.id.toolbar;
+    }
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -53,6 +65,23 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        toolbar = view.findViewById(getToolbarId());
+        if (toolbar != null) {
+            setHasOptionsMenu(true);
+            int statusH = getStatusHeight(getContext());
+            //得到toolbar的布局属性
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
+            //设置布局属性的高度
+            params.height = params.height + statusH;
+            //把布局属性设置回去
+            toolbar.setLayoutParams(params);
+            //设置toolbar的内边距
+            toolbar.setPadding(0, statusH, 0, 0);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            //noinspection ConstantConditions
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
         if (isFirstLoad && getUserVisibleHint()) {
             initData();
             isFirstLoad = false;
@@ -100,35 +129,7 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
 
     @Override
     public void onPermissionsDenied(final int requestCode, List<String> perms) {
-//        String message = "";
-//        switch (requestCode) {
-//            case Constants.RC_LOCATION_READ_PHONE_STATE_PERM:
-//                message = "ic_map_location";
-//                break;
-//            case Constants.RC_CAMERA_AND_WRITE_EXTERNAL_STORAGE_PERM:
-//                message = "访问相机与访问本地存储";
-//                break;
-//        }
-//        String askAgain = "这个程序可能无法正确工作没有请求\"" + message +
-//                "\"的权限。打开应用程序设置修改应用程序的权限。";
-//        String title = "权限必需";
-//        if (!StringUtils.isEmpty(message) &&
-//                EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-//            new AppSettingsDialog.Builder(this, askAgain)
-//                    .setTitle(title)
-//                    .setRequestCode(requestCode)
-//                    .setPositiveButton(getString(R.string.setting))
-//                    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            if (!(requestCode == Constants.RC_LOCATION_READ_PHONE_STATE_PERM)) {
-//                                ActivityManager.getInstance().currentActivity().finish();
-//                            }
-//                        }
-//                    })
-//                    .build()
-//                    .show();
-//        }
+
     }
 
 
@@ -138,5 +139,33 @@ public abstract class BaseFragment extends Fragment implements IContainer, EasyP
     }
 
     protected abstract void initEvent();
+    /**
+     * 获得状态栏的高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getStatusHeight(Context context) {
+
+        int statusHeight = -1;
+        try {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusHeight = context.getResources().getDimensionPixelSize(height);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return statusHeight;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+    }
+
+
 
 }

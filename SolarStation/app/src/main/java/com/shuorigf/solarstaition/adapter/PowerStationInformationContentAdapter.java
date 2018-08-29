@@ -153,8 +153,14 @@ public class PowerStationInformationContentAdapter extends BaseQuickAdapter<Inte
             case R.string.address:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.address);
                 break;
-            case R.string.coordinate:
-                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.longitude);
+            case R.string.longitude:
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.longitude+" °");
+                break;
+            case R.string.latitude:
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.latitude+" °");
+                break;
+            case R.string.altitude:
+                baseViewHolder.setText(R.id.tv_content, stationDetailInfo.altitude+" m");
                 break;
             case R.string.maximum_annual_temperature:
                 baseViewHolder.setText(R.id.tv_content, stationDetailInfo.maxAnnualTemper+" ℃");

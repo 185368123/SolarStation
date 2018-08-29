@@ -19,8 +19,8 @@
     </string-array>
 
     <integer-array name="homepage_number_icon">
-        <item>@mipmap/ic_electricity</item>
-        <item>@mipmap/ic_standard_coal</item>
+        <item>@mipmap/project_num</item>
+        <item>@mipmap/station_num</item>
     </integer-array>
 
     <string-array name="homepage_electricity_title">
@@ -177,7 +177,9 @@
 
     <string-array name="geography_information_title">
         <item>@string/address</item>
-        <item>@string/coordinate</item>
+        <item>@string/longitude</item>
+        <item>@string/latitude</item>
+        <item>@string/altitude</item>
         <item>@string/maximum_annual_temperature</item>
         <item>@string/minimum_annual_temperature</item>
         <item>@string/geography_remark</item>

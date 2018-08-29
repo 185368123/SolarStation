@@ -2,6 +2,10 @@ package com.shuorigf.solarstaition.ui.fragment.devicemanage;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -22,16 +26,16 @@ import com.shuorigf.solarstaition.data.service.DeviceService;
 import com.shuorigf.solarstaition.ui.view.MyXFormatter;
 import com.shuorigf.solarstaition.util.DisposableManager;
 import com.shuorigf.solarstaition.util.JsonUntils;
-import com.shuorigf.solarstaition.util.LogUtils;
 import com.shuorigf.solarstaition.util.RetrofitUtil;
 import com.shuorigf.solarstaition.util.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 import rx.functions.Action1;
@@ -63,6 +67,10 @@ public class RealTimeCurveChartFragment extends BaseFragment {
     TextView mBottomMinTv;
     @BindView(R.id.tv_real_time_curve_bottom_avg)
     TextView mBottomAvgTv;
+    @BindView(R.id.ll_top)
+    LinearLayout llTop;
+    @BindView(R.id.ll_bottom)
+    LinearLayout llBottom;
 
     private DeviceService mDeviceService;
 
@@ -123,6 +131,8 @@ public class RealTimeCurveChartFragment extends BaseFragment {
             case 3:
                 mTopTitleTv.setText(R.string.load_power);
                 mDeviceDataLogChartParams1.type = DeviceDataLogChartParams.TYPE_LOAD_POWER;
+                mBottomLineChart.setVisibility(View.GONE);
+                llBottom.setVisibility(View.GONE);
                 break;
         }
 
@@ -135,7 +145,7 @@ public class RealTimeCurveChartFragment extends BaseFragment {
         lineChart.setTouchEnabled(false);
 
         lineChart.getDescription().setEnabled(false);
-        lineChart.setNoDataText("");
+        lineChart.setNoDataText("暂无数据");
         lineChart.setPinchZoom(false);
 
         XAxis xAxis = lineChart.getXAxis();
@@ -163,14 +173,12 @@ public class RealTimeCurveChartFragment extends BaseFragment {
 
     private void initLineChartXY(LineChart lineChart, DeviceDataLogChartInfo deviceDataLogChartInfo) {
         String[] X_VALUE = JsonUntils.getKey(new Gson().toJson(deviceDataLogChartInfo.logInfo));
+        if (X_VALUE.length == 0) {
+            return;
+        }
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setAxisMinimum(Float.parseFloat(deviceDataLogChartInfo.min) - 1);
         leftAxis.setAxisMaximum(Float.parseFloat(deviceDataLogChartInfo.max) + 1);
-        LogUtils.logd("X_VALUE:"+X_VALUE.length);
-        if (X_VALUE.length==0){
-            X_VALUE=new String[]{"暂无数据"};
-        }
-        LogUtils.logd("X_VALUE:"+X_VALUE[0]);
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setLabelCount(X_VALUE.length);
         xAxis.setValueFormatter(new MyXFormatter(X_VALUE));
@@ -234,7 +242,12 @@ public class RealTimeCurveChartFragment extends BaseFragment {
         }
         LineChartData lineChartData = new LineChartData();
         List<Float> list = JsonUntils.getValue(new Gson().toJson(logInfo));
-
+        if (list.size() == 0) {
+            mTopLineChart.clear();
+            llTop.setVisibility(View.GONE);
+            return;
+        }
+        llTop.setVisibility(View.VISIBLE);
         lineChartData.addLine(list, ContextCompat.getColor(getContext(), R.color.textBlue), true, false);
         lineChartData.drawLine(mTopLineChart);
     }
@@ -289,6 +302,12 @@ public class RealTimeCurveChartFragment extends BaseFragment {
         }
         LineChartData lineChartData = new LineChartData();
         List<Float> list = JsonUntils.getValue(new Gson().toJson(logInfo));
+        if (list.size() == 0) {
+            mBottomLineChart.clear();
+            llBottom.setVisibility(View.GONE);
+            return;
+        }
+        llBottom.setVisibility(View.VISIBLE);
         lineChartData.addLine(list, ContextCompat.getColor(getContext(), R.color.textBlue), true, false);
         lineChartData.drawLine(mBottomLineChart);
     }
@@ -303,8 +322,8 @@ public class RealTimeCurveChartFragment extends BaseFragment {
             public void call(Object o) {
                 mDeviceDataLogChartParams1.dateType = SingleBeans.getInstance().getDate_type();
                 mDeviceDataLogChartParams2.dateType = SingleBeans.getInstance().getDate_type();
-                mDeviceDataLogChartParams1.date=SingleBeans.getInstance().getDate();
-                mDeviceDataLogChartParams2.date=SingleBeans.getInstance().getDate();
+                mDeviceDataLogChartParams1.date = SingleBeans.getInstance().getDate();
+                mDeviceDataLogChartParams2.date = SingleBeans.getInstance().getDate();
                 getDataLogChart1();
                 getDataLogChart2();
             }
@@ -319,5 +338,4 @@ public class RealTimeCurveChartFragment extends BaseFragment {
             }
         });
     }
-
 }

@@ -153,6 +153,15 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
             case R.string.address:
                 content.setText(mStationSaveParams.address);
                 break;
+            case R.string.longitude:
+                content.setText(mStationSaveParams.longitude);
+                break;
+            case R.string.latitude:
+                content.setText(mStationSaveParams.latitude);
+                break;
+            case R.string.altitude:
+                content.setText(mStationSaveParams.altitude);
+                break;
             case R.string.maximum_annual_temperature:
                 content.setText(mStationSaveParams.maxAnnualTemper);
                 break;
@@ -352,6 +361,15 @@ public class NewBuildPowerStationContentAdapter extends BaseQuickAdapter<Integer
                         break;
                     case R.string.address:
                         mStationSaveParams.address = editable.toString().trim();
+                        break;
+                    case R.string.longitude:
+                        mStationSaveParams.longitude=editable.toString().trim();
+                        break;
+                    case R.string.latitude:
+                        mStationSaveParams.latitude=editable.toString().trim();
+                        break;
+                    case R.string.altitude:
+                        mStationSaveParams.altitude=editable.toString().trim();
                         break;
                     case R.string.maximum_annual_temperature:
                         mStationSaveParams.maxAnnualTemper = editable.toString().trim();
